@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
+import { siteConfig } from '../site.config';
+
+const title = "Plumbing Financing in Ocala | Floyd's Plumbing";
+const description =
+  "Affordable monthly financing for water heaters, repipes, and major plumbing projects. Floyd's Plumbing offers Wisetack financing with soft credit check.";
+
+const f = siteConfig.financing;
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">Financing</li>
+        </ol>
+      </nav>
+      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Plumbing Financing</h1>
+      <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
+        Don't let a failed water heater or a full repipe wreck your month. Pay over time with flexible plans.
+      </p>
+    </div>
+  </div>
+
+  {f && (
+    <div class="reveal mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">
+          <p class="text-xs font-black uppercase tracking-widest text-brand">Step 1</p>
+          <h2 class="mt-2 text-xl font-black uppercase text-navy">Get Your Quote</h2>
+          <p class="mt-3 text-slate-600">
+            We diagnose the issue, scope the work, and give you a flat-rate price in writing.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">
+          <p class="text-xs font-black uppercase tracking-widest text-brand">Step 2</p>
+          <h2 class="mt-2 text-xl font-black uppercase text-navy">Pre-Qualify in 60s</h2>
+          <p class="mt-3 text-slate-600">
+            Soft credit check only, with zero impact on your score. See your rate and monthly payment instantly.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">
+          <p class="text-xs font-black uppercase tracking-widest text-brand">Step 3</p>
+          <h2 class="mt-2 text-xl font-black uppercase text-navy">Work Gets Done</h2>
+          <p class="mt-3 text-slate-600">
+            Approved? We schedule the job. You pay a simple monthly amount, no prepayment penalties.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 rounded-3xl border border-yellow/30 bg-gradient-to-br from-navy to-[#0a4d5a] p-8 text-white md:p-10">
+        <p class="text-xs font-black uppercase tracking-[0.25em] text-yellow">Financing details</p>
+        <h2 class="mt-2 text-3xl font-black uppercase tracking-tight sm:text-4xl">
+          Rates from {f.minApr} APR · Terms up to {f.maxMonths} months
+        </h2>
+        <ul class="mt-6 grid gap-3 text-sm text-slate-200 sm:grid-cols-2">
+          <li class="flex gap-2"><span class="text-yellow">✓</span> Powered by {f.partner}</li>
+          <li class="flex gap-2"><span class="text-yellow">✓</span> Soft credit check with no score impact</li>
+          <li class="flex gap-2"><span class="text-yellow">✓</span> Fixed monthly payments</li>
+          <li class="flex gap-2"><span class="text-yellow">✓</span> No prepayment penalties</li>
+          <li class="flex gap-2"><span class="text-yellow">✓</span> Decisions in under 60 seconds</li>
+          <li class="flex gap-2"><span class="text-yellow">✓</span> Perfect for repipes, tankless conversions, sewer work</li>
+        </ul>
+        <p class="mt-6 text-xs text-slate-400">
+          Financing offered through {f.partner}. Rates and terms subject to eligibility and credit approval. See your
+          {f.partner} disclosure for full details.
+        </p>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href={`tel:${siteConfig.phoneTel}`}
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-8 py-4 text-sm font-black uppercase tracking-wide text-white shadow-md hover:bg-red-700"
+        >
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <p class="mt-4 text-sm text-slate-500">Or <a href="/contact/" class="font-bold text-brand hover:underline">send a message</a> and we'll follow up.</p>
+      </div>
+    </div>
+  )}
+
+  <BreadcrumbJsonLd crumbs={[{ name: 'Home', item: '/' }, { name: 'Financing', item: '/financing/' }]} />
+</BaseLayout>

@@ -1,0 +1,233 @@
+---
+import { siteConfig } from '../site.config';
+import { mainServices, subServices } from '../data/services';
+
+const { streetAddress, addressLocality, addressRegion, postalCode } = siteConfig.address;
+const hasStreet = Boolean(streetAddress && streetAddress.trim());
+const hours = siteConfig.hours;
+const dayLabel: Record<string, string> = {
+  Mo: 'Mon',
+  Tu: 'Tue',
+  We: 'Wed',
+  Th: 'Thu',
+  Fr: 'Fri',
+  Sa: 'Sat',
+  Su: 'Sun'
+};
+const formatDays = (days: readonly string[]) => {
+  if (days.length === 1) return dayLabel[days[0]];
+  return `${dayLabel[days[0]]}–${dayLabel[days[days.length - 1]]}`;
+};
+const formatTime = (t: string) => {
+  const [h, m] = t.split(':').map((x) => parseInt(x, 10));
+  const suffix = h >= 12 ? 'pm' : 'am';
+  const h12 = h % 12 || 12;
+  return m === 0 ? `${h12}${suffix}` : `${h12}:${String(m).padStart(2, '0')}${suffix}`;
+};
+---
+
+<footer class="bg-navy bg-trade-grid text-slate-300">
+  <div class="mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-5">
+
+      <!-- Col 1: Brand / Contact -->
+      <div class="col-span-2 lg:col-span-2">
+        <img
+          src="/images/floyds-plumbing-logo-trans.png"
+          alt={siteConfig.businessName}
+          width="938"
+          height="375"
+          class="h-14 w-auto max-w-[220px] object-contain object-left"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="mt-3 max-w-sm text-sm text-slate-400">
+          Family-owned Ocala plumbers since {siteConfig.foundingYear}. Honest work, fair prices, no surprises.
+        </p>
+        <ul class="mt-5 space-y-3 text-sm">
+          {hasStreet && (
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <circle cx="12" cy="11" r="3" />
+              </svg>
+              <span class="leading-snug text-slate-400">
+                {streetAddress}<br />
+                {addressLocality}, {addressRegion} {postalCode}
+              </span>
+            </li>
+          )}
+          {!hasStreet && (
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 h-4 w-4 shrink-0 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <circle cx="12" cy="11" r="3" />
+              </svg>
+              <span class="leading-snug text-slate-400">
+                Serving {addressLocality}, {addressRegion} &amp; Marion County
+              </span>
+            </li>
+          )}
+          <li class="flex items-center gap-2.5">
+            <svg class="h-4 w-4 shrink-0 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <a href={`tel:${siteConfig.phoneTel}`} class="font-bold text-red-400 hover:text-red-300">
+              {siteConfig.phoneDisplay}
+            </a>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg class="h-4 w-4 shrink-0 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href={`mailto:${siteConfig.email}`} class="text-slate-400 hover:text-yellow">{siteConfig.email}</a>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg class="mt-0.5 h-4 w-4 shrink-0 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <span class="leading-snug text-slate-400">
+              {hours.map((h) => (
+                <span class="block">{formatDays(h.days)}: {formatTime(h.opens)}–{formatTime(h.closes)}</span>
+              ))}
+              {siteConfig.emergency24_7 && (
+                <span class="mt-1 block font-bold text-amber-400">Emergencies 24/7</span>
+              )}
+            </span>
+          </li>
+        </ul>
+        <p class="mt-5 text-xs font-bold uppercase tracking-widest text-slate-500">
+          License: <span class="text-yellow">{siteConfig.license.cfc}</span>
+          {siteConfig.license.insured && <span class="ml-2">· Licensed &amp; Insured</span>}
+        </p>
+
+        <!-- Social icons -->
+        <div class="mt-6 flex items-center gap-3">
+          {siteConfig.social.facebook && (
+            <a
+              href={siteConfig.social.facebook}
+              class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-slate-400 transition hover:border-yellow/60 hover:text-yellow"
+              aria-label="Facebook"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+              </svg>
+            </a>
+          )}
+          {siteConfig.social.instagram && (
+            <a
+              href={siteConfig.social.instagram}
+              class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-slate-400 transition hover:border-yellow/60 hover:text-yellow"
+              aria-label="Instagram"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+          )}
+          <a
+            href={siteConfig.googleBusinessUrl}
+            class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-slate-400 transition hover:border-yellow/60 hover:text-yellow"
+            aria-label="Google Reviews"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a6.033 6.033 0 110-12.064c1.498 0 2.866.549 3.921 1.453l2.814-2.814A9.969 9.969 0 0012.545 2C7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748l-9.426-.013z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Services -->
+      <div>
+        <p class="text-xs font-black uppercase tracking-widest text-yellow">Services</p>
+        <ul class="mt-4 space-y-2.5 text-sm font-semibold">
+          {mainServices.map((s) => (
+            <li>
+              <a class="hover:text-yellow" href={`/services/${s.slug}/`}>{s.navTitle ?? s.title}</a>
+            </li>
+          ))}
+          <li class="pt-1 text-slate-500">
+            <span class="text-xs uppercase tracking-widest">Specialty</span>
+          </li>
+          {subServices.slice(0, 5).map((s) => (
+            <li>
+              <a class="hover:text-yellow" href={`/services/${s.slug}/`}>{s.navTitle ?? s.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 3: Areas -->
+      <div>
+        <p class="text-xs font-black uppercase tracking-widest text-yellow">Service Areas</p>
+        <ul class="mt-4 space-y-2.5 text-sm font-semibold">
+          <li><a class="hover:text-yellow" href="/service-areas/ocala/">Ocala</a></li>
+          <li><a class="hover:text-yellow" href="/service-areas/belleview/">Belleview</a></li>
+          <li><a class="hover:text-yellow" href="/service-areas/dunnellon/">Dunnellon</a></li>
+          <li><a class="hover:text-yellow" href="/service-areas/silver-springs-shores/">Silver Springs Shores</a></li>
+          <li><a class="hover:text-yellow" href="/service-areas/summerfield/">Summerfield</a></li>
+          <li><a class="hover:text-yellow" href="/service-areas/anthony/">Anthony</a></li>
+          <li class="pt-2"><a class="text-yellow hover:underline" href="/service-areas/">All Service Areas →</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Navigation + Quick Links -->
+      <div>
+        <p class="text-xs font-black uppercase tracking-widest text-yellow">Company</p>
+        <ul class="mt-4 space-y-2.5 text-sm font-semibold">
+          <li><a class="hover:text-yellow" href="/about/">About</a></li>
+          <li><a class="hover:text-yellow" href="/financing/">Financing</a></li>
+          <li><a class="hover:text-yellow" href="/faq/">FAQ</a></li>
+          <li><a class="hover:text-yellow" href="/blog/">Blog</a></li>
+          <li><a class="hover:text-yellow" href="/contact/">Contact</a></li>
+          <li>
+            <a
+              class="hover:text-yellow"
+              href={siteConfig.googleBusinessUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Leave a Review
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Payment methods -->
+    <div class="mt-10 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="text-xs font-black uppercase tracking-widest text-yellow">We accept</p>
+        <p class="mt-2 text-sm text-slate-400">{siteConfig.paymentMethods.join(' · ')}</p>
+      </div>
+      {siteConfig.financing && (
+        <a
+          href="/financing/"
+          class="inline-flex items-center gap-2 self-start rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-yellow hover:bg-yellow/20"
+        >
+          Financing from {siteConfig.financing.minApr} APR
+        </a>
+      )}
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-8 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {new Date().getFullYear()} {siteConfig.businessName}. All rights reserved. {siteConfig.license.cfc}</p>
+      <div class="flex flex-wrap gap-6 font-semibold">
+        <a class="underline decoration-slate-600 underline-offset-4 hover:text-yellow" href="/privacy/">Privacy Policy</a>
+        <a class="underline decoration-slate-600 underline-offset-4 hover:text-yellow" href="/terms/">Terms of Service</a>
+        <a class="underline decoration-slate-600 underline-offset-4 hover:text-yellow" href="/accessibility/">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>

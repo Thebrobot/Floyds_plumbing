@@ -1,0 +1,27 @@
+---
+interface Crumb {
+  name: string;
+  item: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+
+const origin = Astro.site ? new URL(Astro.site).origin : 'https://floydsplumbing.com';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: c.item.startsWith('http') ? c.item : new URL(c.item, origin).href
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

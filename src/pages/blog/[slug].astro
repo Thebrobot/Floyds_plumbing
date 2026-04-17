@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../../components/BreadcrumbJsonLd.astro';
+import { posts, getPostBySlug } from '../../data/blog';
+import { siteConfig } from '../../site.config';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPostBySlug(slug ?? '');
+
+if (!post) {
+  return Astro.redirect('/blog/');
+}
+
+const title = `${post.title} | Floyd's Plumbing`;
+const description = post.description;
+
+const origin = Astro.site ? new URL(Astro.site).origin : 'https://floydsplumbing.com';
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  author: { '@type': 'Organization', name: post.author },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.businessName,
+    logo: { '@type': 'ImageObject', url: new URL(siteConfig.logoPath, origin).href }
+  },
+  mainEntityOfPage: `${origin}/blog/${post.slug}/`
+};
+const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/blog/">Blog</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">{post.title}</li>
+        </ol>
+      </nav>
+      <p class="mt-6 flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
+        <time datetime={post.publishedAt}>{formattedDate}</time>
+        <span aria-hidden="true">·</span>
+        <span>{post.readMinutes} min read</span>
+      </p>
+      <h1 class="font-display mt-2 text-balance text-3xl uppercase text-navy sm:text-4xl lg:text-5xl">{post.title}</h1>
+      <p class="mt-4 max-w-2xl text-base text-slate-700 sm:text-lg">{post.description}</p>
+    </div>
+  </div>
+
+  <article class="reveal mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="prose-blog space-y-4 text-base leading-relaxed text-slate-700 sm:text-lg" set:html={post.bodyHtml}></div>
+
+    <div class="mt-14 rounded-2xl border border-slate-200 bg-page-muted p-6 sm:p-8">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Need help?</p>
+      <h2 class="mt-2 text-xl font-black uppercase text-navy">Give us a call, we'll walk you through it.</h2>
+      <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+        <a href={`tel:${siteConfig.phoneTel}`} class="inline-flex items-center justify-center rounded-full bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-red-700">
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-charcoal-dark">
+          Request Service
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <BreadcrumbJsonLd
+    crumbs={[
+      { name: 'Home', item: '/' },
+      { name: 'Blog', item: '/blog/' },
+      { name: post.title, item: `/blog/${post.slug}/` }
+    ]}
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+</BaseLayout>

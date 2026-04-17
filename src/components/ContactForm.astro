@@ -1,0 +1,155 @@
+---
+import { siteConfig } from '../site.config';
+import { services, mainServices } from '../data/services';
+
+interface Props {
+  id: string;
+  compact?: boolean;
+  heading?: string;
+  defaultService?: string;
+}
+
+const { id, compact = false, heading = 'Request service', defaultService = '' } = Astro.props;
+
+const hasAction = Boolean(siteConfig.contactFormActionUrl);
+const smsConsentLabel =
+  "Opt-in to SMS updates from Floyd's Plumbing (optional). Message frequency varies. Reply STOP to opt out. Message and data rates may apply.";
+---
+
+<section
+  class:list={[
+    'rounded-2xl border border-slate-200/90 bg-white p-6 shadow-lg ring-1 ring-slate-900/5',
+    compact && 'p-4 sm:p-5'
+  ]}
+>
+  <h2 class:list={['font-display text-navy', compact ? 'text-xl uppercase' : 'text-2xl uppercase']}>{heading}</h2>
+  <p class="mt-2 text-sm text-slate-600">
+    Tell us what you need and we will follow up by phone or email. SMS updates are optional (opt in below).
+  </p>
+  <form
+    id={id}
+    class="mt-6 space-y-4"
+    method="post"
+    action={hasAction ? siteConfig.contactFormActionUrl : undefined}
+    data-phone-tel={siteConfig.phoneTel}
+    {...(!hasAction ? { 'data-contact-fallback': 'true' } : {})}
+  >
+    {/* Honeypot: bots fill this, humans don't */}
+    <div class="hidden" aria-hidden="true">
+      <label>
+        Leave this field empty
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div class:list={['grid gap-4', compact ? 'sm:grid-cols-2' : 'sm:grid-cols-2']}>
+      <div>
+        <label for={`${id}-name`} class="block text-sm font-bold text-navy">Full name</label>
+        <input
+          id={`${id}-name`}
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+        />
+      </div>
+      <div>
+        <label for={`${id}-phone`} class="block text-sm font-bold text-navy">Phone</label>
+        <input
+          id={`${id}-phone`}
+          name="phone"
+          type="tel"
+          required
+          autocomplete="tel"
+          inputmode="tel"
+          pattern="[0-9+\-()\s]{10,}"
+          title="Enter a valid phone number"
+          class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+        />
+      </div>
+    </div>
+    <div>
+      <label for={`${id}-email`} class="block text-sm font-bold text-navy">Email</label>
+      <input
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+      />
+    </div>
+    <div class:list={['grid gap-4', compact ? 'sm:grid-cols-2' : 'sm:grid-cols-2']}>
+      <div>
+        <label for={`${id}-service`} class="block text-sm font-bold text-navy">Service type</label>
+        <select
+          id={`${id}-service`}
+          name="service"
+          required
+          class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+        >
+          <option value="" disabled selected={defaultService === ''}>Select a service…</option>
+          {mainServices.map((s) => (
+            <option value={s.slug} selected={defaultService === s.slug}>
+              {s.title}
+            </option>
+          ))}
+          <option value="emergency-plumber" selected={defaultService === 'emergency-plumber'}>Emergency (24/7)</option>
+          <option value="other" selected={defaultService === 'other'}>Other / not sure</option>
+        </select>
+      </div>
+      <div>
+        <label for={`${id}-urgency`} class="block text-sm font-bold text-navy">Timeline</label>
+        <select
+          id={`${id}-urgency`}
+          name="urgency"
+          class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+        >
+          <option value="flexible">Flexible (schedule me anytime)</option>
+          <option value="this-week">This week</option>
+          <option value="today">Today / ASAP</option>
+          <option value="emergency">Emergency (call me now)</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <label for={`${id}-message`} class="block text-sm font-bold text-navy">Message</label>
+      <textarea
+        id={`${id}-message`}
+        name="message"
+        rows={compact ? 3 : 5}
+        required
+        placeholder="Describe the issue, include any photos or plans if helpful."
+        class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+      ></textarea>
+    </div>
+    <div class="rounded-xl border border-slate-200 bg-page-muted p-4">
+      <label class="flex cursor-pointer gap-3 text-sm leading-snug text-navy">
+        <input
+          type="checkbox"
+          name="sms_consent"
+          value="yes"
+          class="mt-1 h-4 w-4 shrink-0 rounded border-slate-400 text-brand focus:ring-brand"
+        />
+        <span>{smsConsentLabel}</span>
+      </label>
+    </div>
+    <button
+      type="submit"
+      class="w-full rounded-full bg-yellow px-4 py-3 text-center text-base font-black uppercase tracking-wide text-white shadow-sm transition hover:bg-yellow-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:w-auto sm:px-8"
+    >
+      Send request
+    </button>
+    <p class="text-xs text-slate-500">
+      Your information is used only to respond to this request. See our <a href="/privacy/" class="underline hover:text-brand">Privacy Policy</a>.
+    </p>
+    {
+      !hasAction && (
+        <p class="text-xs text-slate-500">
+          Form endpoint not configured. Submitting will open your phone dialer so you can call us now.
+        </p>
+      )
+    }
+  </form>
+</section>

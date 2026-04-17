@@ -1,0 +1,101 @@
+---
+import { siteConfig } from '../site.config';
+
+const items = [
+  {
+    icon: 'shield',
+    title: 'Licensed & Insured',
+    text: `Florida CFC ${siteConfig.license.cfc}. Bonded and fully insured on every crew, every job.`
+  },
+  {
+    icon: 'clock',
+    title: '24/7 Emergency Service',
+    text: 'Real plumbers on call, not a call center. Most emergencies dispatched within an hour.'
+  },
+  {
+    icon: 'dollar',
+    title: 'Upfront Flat Pricing',
+    text: 'You get the total in writing before we pick up a wrench. No clock-watching, no surprise fees.'
+  },
+  {
+    icon: 'award',
+    title: `${siteConfig.guarantee.laborWarrantyMonths}-Month Labor Warranty`,
+    text: `${siteConfig.guarantee.satisfaction}. If it's not right, we make it right.`
+  },
+  {
+    icon: 'heart',
+    title: 'Family-Owned Since 2008',
+    text: 'Your neighbors. Our name is on the truck, and we answer for it.'
+  },
+  {
+    icon: 'percent',
+    title: 'Financing Available',
+    text: siteConfig.financing
+      ? `${siteConfig.financing.partner} financing from ${siteConfig.financing.minApr} APR, up to ${siteConfig.financing.maxMonths} months.`
+      : 'Flexible payment options for bigger jobs.'
+  }
+];
+---
+
+<section class="bg-page py-16 md:py-24" aria-labelledby="why-heading">
+  <div class="reveal mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Why Floyd's Plumbing</p>
+      <h2 id="why-heading" class="mt-2 text-3xl font-black uppercase tracking-tight text-navy sm:text-4xl">
+        Six Reasons Ocala Trusts Us
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+        We're not the cheapest and we're not the flashiest. We're the crew you call when you want it done right.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <li class="card-service group flex flex-col">
+          <span
+            class="card-service-icon flex h-12 w-12 items-center justify-center rounded-full text-brand transition-colors duration-200"
+            aria-hidden="true"
+          >
+            {item.icon === 'shield' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            )}
+            {item.icon === 'clock' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            )}
+            {item.icon === 'dollar' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            )}
+            {item.icon === 'award' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="6" />
+                <path d="m8.21 13.89-1.94 7.11 5.73-3.26 5.73 3.26-1.94-7.11" />
+              </svg>
+            )}
+            {item.icon === 'heart' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            )}
+            {item.icon === 'percent' && (
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="19" y1="5" x2="5" y2="19" />
+                <circle cx="6.5" cy="6.5" r="2.5" />
+                <circle cx="17.5" cy="17.5" r="2.5" />
+              </svg>
+            )}
+          </span>
+          <h3 class="mt-4 text-lg font-black uppercase tracking-tight text-navy">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

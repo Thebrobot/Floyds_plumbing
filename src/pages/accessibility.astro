@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+
+const title = "Accessibility Statement | Floyd's Plumbing";
+const description = "Floyd's Plumbing is committed to making our website accessible to everyone.";
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <h1 class="font-display text-3xl uppercase text-navy sm:text-4xl">Accessibility Statement</h1>
+      <p class="mt-4 text-base text-slate-700">
+        Floyd's Plumbing is committed to making our website usable by everyone, including people with disabilities.
+      </p>
+    </div>
+  </div>
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 leading-relaxed text-slate-700 sm:px-6 lg:px-8">
+    <h2 class="text-xl font-black uppercase text-navy">Our commitment</h2>
+    <p>
+      We aim to conform to Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. This means our site should be
+      perceivable, operable, understandable, and robust for people using keyboards, screen readers, magnifiers, and
+      other assistive technologies.
+    </p>
+    <h2 class="text-xl font-black uppercase text-navy">Ongoing efforts</h2>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Semantic HTML and ARIA labels throughout navigation and interactive components.</li>
+      <li>Keyboard-accessible menus, forms, and dropdowns.</li>
+      <li>Color contrast that meets or exceeds WCAG AA for body text.</li>
+      <li>Respect for <code>prefers-reduced-motion</code> to minimize animation for sensitive users.</li>
+      <li>Alternative text on meaningful images.</li>
+    </ul>
+    <h2 class="text-xl font-black uppercase text-navy">Run into a barrier?</h2>
+    <p>
+      If any part of our site is not working for you, please call
+      <a href={`tel:${siteConfig.phoneTel}`} class="font-bold text-brand hover:underline">{siteConfig.phoneDisplay}</a>
+      or email
+      <a href={`mailto:${siteConfig.email}`} class="font-bold text-brand hover:underline">{siteConfig.email}</a>
+      and let us know. We'll respond quickly and help you get the information or service you need by phone.
+    </p>
+  </div>
+</BaseLayout>

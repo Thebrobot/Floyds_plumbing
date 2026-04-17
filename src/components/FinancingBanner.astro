@@ -1,0 +1,36 @@
+---
+import { siteConfig } from '../site.config';
+
+const f = siteConfig.financing;
+if (!f) return;
+---
+
+{f && (
+<section class="bg-gradient-to-br from-navy via-[#0a4d5a] to-navy py-12 text-white md:py-16" aria-label="Financing">
+  <div class="reveal mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center gap-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-sm md:flex-row md:p-10">
+      <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-yellow text-white shadow-lg">
+        <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2" />
+          <line x1="2" y1="10" x2="22" y2="10" />
+        </svg>
+      </div>
+      <div class="flex-1 text-center md:text-left">
+        <p class="text-xs font-black uppercase tracking-[0.25em] text-yellow">Financing available</p>
+        <h2 class="mt-1 text-2xl font-black uppercase tracking-tight sm:text-3xl">
+          Pay monthly from {f.minApr} APR
+        </h2>
+        <p class="mt-2 text-sm text-slate-300 sm:text-base">
+          {f.blurb} Pre-qualify in 60 seconds, powered by {f.partner}.
+        </p>
+      </div>
+      <a
+        href="/financing/"
+        class="inline-flex shrink-0 items-center justify-center rounded-full bg-yellow px-6 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-md transition hover:bg-yellow-hover"
+      >
+        Learn More
+      </a>
+    </div>
+  </div>
+</section>
+)}

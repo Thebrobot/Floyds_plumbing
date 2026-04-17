@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../../components/BreadcrumbJsonLd.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import FinancingBanner from '../../components/FinancingBanner.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import { locations, getLocationBySlug } from '../../data/locations';
+import { mainServices, subServices } from '../../data/services';
+import { siteConfig } from '../../site.config';
+
+export function getStaticPaths() {
+  return locations.map((l) => ({ params: { slug: l.slug } }));
+}
+
+const { slug } = Astro.params;
+const location = getLocationBySlug(slug ?? '');
+
+if (!location) {
+  return Astro.redirect('/service-areas/');
+}
+
+const title = `Plumbers in ${location.displayName} | Floyd's Plumbing`;
+const description = location.metaDescription;
+
+const featuredServices = [...mainServices.slice(0, 3), ...subServices.slice(0, 3)];
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/service-areas/">Service Areas</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">{location.city}</li>
+        </ol>
+      </nav>
+      <p class="mt-6 text-xs font-black uppercase tracking-[0.25em] text-brand">{location.county}</p>
+      <h1 class="font-display mt-1 text-balance text-4xl uppercase text-navy sm:text-5xl lg:text-6xl">
+        Plumbers in {location.displayName}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
+        {location.shortDescription}
+      </p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a href={`tel:${siteConfig.phoneTel}`} class="inline-flex items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-md hover:bg-red-700">
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center rounded-full bg-navy px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-md hover:bg-charcoal-dark">
+          Book Online
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="bg-page py-12 md:py-16">
+    <div class="reveal mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+      <div class="lg:col-span-2">
+        <h2 class="text-2xl font-black uppercase tracking-tight text-navy">
+          Your local plumber in {location.city}
+        </h2>
+        <div class="mt-5 space-y-4 text-base leading-relaxed text-slate-700">
+          {location.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+
+        <h3 class="mt-10 text-lg font-black uppercase tracking-tight text-navy">Neighborhoods we know</h3>
+        <ul class="mt-3 flex flex-wrap gap-2">
+          {location.neighborhoods.map((n) => (
+            <li class="rounded-full border border-slate-200 bg-page-muted px-3 py-1.5 text-sm font-semibold text-slate-700">
+              {n}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside class="rounded-2xl border border-slate-200 bg-page-muted p-6 shadow-sm">
+        <p class="text-xs font-black uppercase tracking-widest text-brand">Why choose us here</p>
+        <ul class="mt-4 space-y-3 text-sm text-slate-700">
+          {location.highlights.map((h) => (
+            <li class="flex gap-2"><span class="text-yellow">✓</span> {h}</li>
+          ))}
+        </ul>
+        <div class="mt-6 rounded-xl bg-navy p-4 text-center text-white">
+          <p class="text-xs font-black uppercase tracking-widest text-yellow">24/7 Emergency</p>
+          <a href={`tel:${siteConfig.phoneTel}`} class="mt-1 block text-lg font-black">{siteConfig.phoneDisplay}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Services in this area -->
+  <section class="bg-page-muted py-12 md:py-16">
+    <div class="reveal mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">In {location.city}</p>
+        <h2 class="mt-2 text-2xl font-black uppercase tracking-tight text-navy sm:text-3xl">Services we offer</h2>
+      </div>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredServices.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}/`} class="card-service group flex h-full flex-col">
+              <span class="card-service-icon flex h-11 w-11 items-center justify-center rounded-full bg-yellow text-white" aria-hidden="true">
+                <ServiceIcon slug={s.slug as any} class="h-5 w-5" />
+              </span>
+              <h3 class="mt-3 text-base font-black uppercase tracking-tight text-navy">{s.navTitle ?? s.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.shortDescription}</p>
+              <span class="mt-3 text-sm font-bold text-brand transition group-hover:translate-x-0.5">Details →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-8 text-center">
+        <a href="/services/" class="inline-flex items-center justify-center rounded-full border-2 border-brand px-7 py-3 text-sm font-black uppercase tracking-wide text-brand hover:bg-brand hover:text-white">
+          All Services →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <FinancingBanner />
+  <FaqSection limit={5} />
+
+  <!-- Contact -->
+  <section class="bg-page py-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <ContactForm id={`${location.slug}-contact`} heading={`Request service in ${location.city}`} defaultService="other" />
+    </div>
+  </section>
+
+  <BreadcrumbJsonLd
+    crumbs={[
+      { name: 'Home', item: '/' },
+      { name: 'Service Areas', item: '/service-areas/' },
+      { name: location.city, item: `/service-areas/${location.slug}/` }
+    ]}
+  />
+</BaseLayout>

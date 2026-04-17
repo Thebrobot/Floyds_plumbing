@@ -1,0 +1,36 @@
+---
+/**
+ * Fluid section edge (Wild Water–style wave), fill = the section *below* the curve.
+ * @see https://dribbble.com/shots/26977157-Wild-Plumbing
+ */
+interface Props {
+  fill: 'navy' | 'white' | 'water' | 'hero';
+  /** Flip 180° so the flat edge aligns with the section above (use under a dark band before a light/blue block). */
+  flip?: boolean;
+}
+
+const { fill, flip = false } = Astro.props;
+
+const fillClass =
+  fill === 'navy'
+    ? 'text-navy'
+    : fill === 'white'
+      ? 'text-white'
+      : fill === 'water'
+        ? 'text-water'
+        : 'text-hero';
+---
+
+<div class:list={['relative w-full leading-[0]', fillClass]} aria-hidden="true">
+  <svg
+    class:list={['block h-10 w-full md:h-14', flip && 'rotate-180']}
+    viewBox="0 0 1440 56"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill="currentColor"
+      d="M0,56V28c120-18 280,22 440,8s320-32 480-14 320,36 520,10v24H0z"
+    ></path>
+  </svg>
+</div>

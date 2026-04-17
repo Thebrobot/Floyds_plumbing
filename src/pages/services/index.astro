@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../../components/BreadcrumbJsonLd.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import { mainServices, subServices } from '../../data/services';
+import { siteConfig } from '../../site.config';
+
+const title = "Plumbing Services in Ocala | Floyd's Plumbing";
+const description =
+  "Full-service Ocala plumbing: new construction, residential, commercial, repairs, backflow testing, repipes, water heaters, drain cleaning, gas lines, and more.";
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">Services</li>
+        </ol>
+      </nav>
+      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Services</h1>
+      <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
+        Ocala plumbing with a custom-job mindset. Pick a category to see how we help homeowners, builders, and
+        businesses across Marion County.
+      </p>
+    </div>
+  </div>
+
+  <div class="reveal mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <div>
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Main Categories</p>
+      <h2 class="mt-2 text-2xl font-black uppercase text-navy">Core Plumbing Services</h2>
+      <ul class="mt-6 grid gap-6 sm:grid-cols-2">
+        {mainServices.map((s) => (
+          <li>
+            <a
+              href={`/services/${s.slug}/`}
+              class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200"
+            >
+              <div class="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-brand/20 to-navy/30">
+                {s.heroImage ? (
+                  <img
+                    src={s.heroImage}
+                    alt={s.heroImageAlt ?? s.title}
+                    width="820"
+                    height="547"
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="absolute inset-0 bg-gradient-to-br from-brand/70 via-brand/60 to-navy" aria-hidden="true"></div>
+                )}
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/15 to-transparent" aria-hidden="true"></div>
+                <span
+                  class="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow text-white shadow-lg ring-4 ring-white/90"
+                  aria-hidden="true"
+                >
+                  <ServiceIcon slug={s.slug} class="h-6 w-6" />
+                </span>
+              </div>
+              <div class="flex flex-1 flex-col p-7">
+                <h3 class="text-xl font-black uppercase tracking-tight text-navy">{s.title}</h3>
+                <p class="mt-3 flex-1 text-slate-600">{s.shortDescription}</p>
+                <span class="mt-5 text-sm font-bold text-brand transition group-hover:translate-x-0.5">Details →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="mt-16">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Specialty Services</p>
+      <h2 class="mt-2 text-2xl font-black uppercase text-navy">Specific Plumbing Work</h2>
+      <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {subServices.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}/`} class="card-service group flex h-full flex-col p-6">
+              <span
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand shadow-sm"
+                aria-hidden="true"
+              >
+                <ServiceIcon slug={s.slug} class="h-5 w-5" />
+              </span>
+              <h3 class="mt-4 text-base font-black uppercase tracking-tight text-navy">{s.navTitle ?? s.title}</h3>
+              <p class="mt-2 flex-1 text-sm text-slate-600">{s.shortDescription}</p>
+              <span class="mt-3 text-sm font-bold text-brand transition group-hover:translate-x-0.5">Details →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="mt-16 rounded-2xl border border-slate-200 bg-page-muted p-8 text-center">
+      <h2 class="text-xl font-black uppercase text-navy">Not sure what you need?</h2>
+      <p class="mt-2 text-slate-600">Tell us what's going on and we'll diagnose it honestly.</p>
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={`tel:${siteConfig.phoneTel}`} class="inline-flex items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-red-700">
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center rounded-full bg-navy px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-charcoal-dark">
+          Book Online
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <BreadcrumbJsonLd crumbs={[{ name: 'Home', item: '/' }, { name: 'Services', item: '/services/' }]} />
+</BaseLayout>

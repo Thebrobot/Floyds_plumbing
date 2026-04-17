@@ -1,0 +1,127 @@
+---
+import { siteConfig } from '../site.config';
+import { mainServices } from '../data/services';
+
+const origin = Astro.site ? new URL(Astro.site).origin : 'https://floydsplumbing.com';
+const logoUrl = new URL(siteConfig.logoPath, origin).href;
+
+const hasStreet = Boolean(siteConfig.address.streetAddress && siteConfig.address.streetAddress.trim());
+
+const address: Record<string, string> = {
+  '@type': 'PostalAddress',
+  addressLocality: siteConfig.address.addressLocality,
+  addressRegion: siteConfig.address.addressRegion,
+  postalCode: siteConfig.address.postalCode,
+  addressCountry: siteConfig.address.addressCountry
+};
+if (hasStreet) address.streetAddress = siteConfig.address.streetAddress;
+
+const openingHoursSpecification = [
+  ...siteConfig.hours.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.days.map((d) => {
+      const map: Record<string, string> = {
+        Mo: 'Monday',
+        Tu: 'Tuesday',
+        We: 'Wednesday',
+        Th: 'Thursday',
+        Fr: 'Friday',
+        Sa: 'Saturday',
+        Su: 'Sunday'
+      };
+      return map[d] ?? d;
+    }),
+    opens: h.opens,
+    closes: h.closes
+  })),
+  ...(siteConfig.emergency24_7
+    ? [
+        {
+          '@type': 'OpeningHoursSpecification',
+          description: '24/7 emergency service',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }
+      ]
+    : [])
+];
+
+const sameAs = [siteConfig.googleBusinessUrl, siteConfig.social.facebook, siteConfig.social.instagram, siteConfig.social.nextdoor]
+  .filter((u): u is string => Boolean(u));
+
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'PlumbingService'],
+  '@id': `${origin}/#business`,
+  name: siteConfig.businessName,
+  legalName: siteConfig.businessName,
+  slogan: siteConfig.tagline,
+  description: siteConfig.defaultDescription,
+  url: origin,
+  telephone: siteConfig.phoneTel,
+  email: siteConfig.email,
+  image: [logoUrl, new URL(siteConfig.heroImagePath, origin).href],
+  logo: logoUrl,
+  address,
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: siteConfig.serviceGeo.latitude,
+    longitude: siteConfig.serviceGeo.longitude
+  },
+  areaServed: [
+    {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: siteConfig.serviceGeo.latitude,
+        longitude: siteConfig.serviceGeo.longitude
+      },
+      geoRadius: {
+        '@type': 'Distance',
+        value: siteConfig.serviceGeo.radiusMeters,
+        unitCode: 'MTR'
+      }
+    },
+    { '@type': 'AdministrativeArea', name: 'Marion County, FL' },
+    { '@type': 'City', name: 'Ocala, FL' },
+    { '@type': 'City', name: 'Belleview, FL' },
+    { '@type': 'City', name: 'Dunnellon, FL' },
+    { '@type': 'City', name: 'Silver Springs Shores, FL' },
+    { '@type': 'City', name: 'Summerfield, FL' },
+    { '@type': 'City', name: 'Anthony, FL' }
+  ],
+  foundingDate: String(siteConfig.foundingYear),
+  priceRange: '$$',
+  paymentAccepted: siteConfig.paymentMethods.join(', '),
+  currenciesAccepted: 'USD',
+  openingHoursSpecification,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: siteConfig.rating.value,
+    reviewCount: siteConfig.rating.count,
+    bestRating: 5,
+    worstRating: 1
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Plumbing services',
+    itemListElement: mainServices.map((s, i) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: s.title,
+        description: s.shortDescription,
+        url: `${origin}/services/${s.slug}/`
+      },
+      position: i + 1
+    }))
+  }
+};
+
+if (sameAs.length) jsonLd.sameAs = sameAs;
+
+const json = JSON.stringify(jsonLd);
+---
+
+<script type="application/ld+json" set:html={json} />

@@ -1,0 +1,182 @@
+---
+import '../styles/global.css';
+import EmergencyBanner from '../components/EmergencyBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyCallBar from '../components/StickyCallBar.astro';
+import LocalBusinessJsonLd from '../components/LocalBusinessJsonLd.astro';
+import { siteConfig } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  /** Preload the homepage hero image for fastest LCP on the home route. */
+  preloadHero?: boolean;
+}
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  ogImage,
+  noIndex = false,
+  preloadHero = false
+} = Astro.props;
+
+const siteBase = Astro.site ?? 'https://floydsplumbing.com';
+const canonicalURL = new URL(Astro.url.pathname, siteBase).href;
+const og = ogImage ?? new URL(siteConfig.logoPath, siteBase).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Icons (add apple-touch-icon.png and favicon.ico to /public/ before launch) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#063d48" />
+    <meta name="msapplication-TileColor" content="#063d48" />
+
+    <!-- Performance hints -->
+    {preloadHero && (
+      <link rel="preload" as="image" href={siteConfig.heroImagePath} fetchpriority="high" />
+    )}
+
+    <!-- Primary meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.businessName} />
+    <meta name="geo.region" content="US-FL" />
+    <meta name="geo.placename" content="Ocala" />
+    <meta name="geo.position" content={`${siteConfig.serviceGeo.latitude};${siteConfig.serviceGeo.longitude}`} />
+    <meta name="ICBM" content={`${siteConfig.serviceGeo.latitude}, ${siteConfig.serviceGeo.longitude}`} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={og} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+
+    <LocalBusinessJsonLd />
+  </head>
+  <body class="pb-24 md:pb-0">
+    <a
+      href="#main-content"
+      class="focus:bg-brand focus:text-white sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:px-4 focus:py-2"
+      >Skip to main content</a
+    >
+    <div class="relative z-[70]">
+      <EmergencyBanner />
+    </div>
+    <div class="relative isolate">
+      <Header currentPath={Astro.url.pathname} />
+      <main
+        id="main-content"
+        class="relative z-0 -mt-[5.75rem] sm:-mt-[7rem] md:-mt-[7.375rem] [&>*:first-child:not(.hero-home)]:pt-28 sm:[&>*:first-child:not(.hero-home)]:pt-32 md:[&>*:first-child:not(.hero-home)]:pt-36"
+      >
+        <slot />
+      </main>
+    </div>
+    <Footer />
+    <StickyCallBar />
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('form[data-contact-fallback="true"]').forEach(function (form) {
+          form.addEventListener('submit', function (e) {
+            if (form.getAttribute('action')) return;
+            e.preventDefault();
+            var tel = form.getAttribute('data-phone-tel');
+            if (tel) window.location.href = 'tel:' + tel;
+          });
+        });
+
+        var header = document.getElementById('site-header');
+        if (header) {
+          var onScroll = function () {
+            header.classList.toggle('is-header-scrolled', window.scrollY > 28);
+          };
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var reveals = document.querySelectorAll('.reveal');
+        if (reduceMotion) {
+          reveals.forEach(function (el) {
+            el.classList.add('reveal-visible');
+          });
+        } else if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('reveal-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: '0px 0px -6% 0px', threshold: 0.06 }
+          );
+          reveals.forEach(function (el) {
+            io.observe(el);
+          });
+        } else {
+          reveals.forEach(function (el) {
+            el.classList.add('reveal-visible');
+          });
+        }
+
+        // Animated counters (opt-in via .count-up data-target)
+        var counters = document.querySelectorAll('[data-count-target]');
+        if (counters.length && 'IntersectionObserver' in window && !reduceMotion) {
+          var cio = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var el = entry.target;
+                cio.unobserve(el);
+                var target = parseFloat(el.getAttribute('data-count-target') || '0');
+                var duration = parseInt(el.getAttribute('data-count-duration') || '1400', 10);
+                var decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+                var start = performance.now();
+                var step = function (now) {
+                  var progress = Math.min(1, (now - start) / duration);
+                  var eased = 1 - Math.pow(1 - progress, 3);
+                  el.textContent = (target * eased).toFixed(decimals);
+                  if (progress < 1) requestAnimationFrame(step);
+                  else el.textContent = target.toFixed(decimals);
+                };
+                requestAnimationFrame(step);
+              });
+            },
+            { threshold: 0.4 }
+          );
+          counters.forEach(function (c) {
+            cio.observe(c);
+          });
+        } else if (reduceMotion) {
+          counters.forEach(function (el) {
+            var target = parseFloat(el.getAttribute('data-count-target') || '0');
+            var decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+            el.textContent = target.toFixed(decimals);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

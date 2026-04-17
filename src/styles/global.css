@@ -1,0 +1,299 @@
+@import "tailwindcss";
+/* Font subset: we only use 400 (body), 600 (semibold), 700 (bold), 800 (black/display) */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
+/* 900 (black) weight used for CTAs + headlines */
+@import "@fontsource/inter/900.css";
+
+/* Floyd's Plumbing - logo: teal primary (#0086a5 family), green accent stripe, white + deep teal nav/footer */
+
+@theme {
+  /* Primary teal (logo “FLOYD’S” + bar) */
+  --color-brand: #0086a5;
+  --color-brand-dark: #006b84;
+  --color-brand-light: #e6f4f7;
+  /* Headings / dark UI text (blue-green, not flat gray) */
+  --color-charcoal: #0c3d47;
+  --color-charcoal-dark: #082f37;
+  /* Footer & dark bands */
+  --color-navy: #063d48;
+  --color-navy-dark: #042f38;
+  /* Surfaces */
+  --color-page: #ffffff;
+  --color-page-muted: #f0f7f8;
+  --color-hero: #e3f4f7;
+  --color-hero-canvas: #eef8fa;
+  --color-hero-tint: rgba(0, 134, 165, 0.12);
+  /* Body copy */
+  --color-ink: #0f172a;
+  --color-ink-muted: #475569;
+  /* Secondary teal (gradients, WaveDivider “water”) */
+  --color-water: #0ea5b8;
+  --color-water-dark: #0891b2;
+  /* Logo green - maps to `yellow` utilities (CTAs, chips, footer labels). Stars: use `text-amber-400` in markup */
+  --color-yellow: #22c55e;
+  --color-yellow-hover: #16a34a;
+  --color-mist: #e6f4f7;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent sticky header from covering anchor targets */
+  :target {
+    scroll-margin-top: 8rem;
+  }
+
+  section[id] {
+    scroll-margin-top: 8rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-page font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+
+  .font-display {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Sticky header (utility bar + main nav) */
+#site-header {
+  transition: box-shadow 0.2s ease;
+}
+
+#site-header.is-header-scrolled .header-main {
+  @apply border-slate-200/90 bg-white shadow-lg ring-1 ring-slate-200/60;
+}
+
+#site-header .header-main .header-logo {
+  @apply h-11 w-auto max-w-[200px] object-contain object-left transition-[height,max-width] duration-200 sm:h-12 sm:max-w-[240px] md:max-w-[260px];
+}
+
+#site-header.is-header-scrolled .header-main .header-logo {
+  @apply h-10 max-w-[180px] sm:h-10 sm:max-w-[220px] md:max-w-[240px];
+}
+
+#site-header.is-header-scrolled .header-main {
+  @apply py-2.5;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Light hero “ripple” wash */
+.bg-ripple {
+  background-image:
+    radial-gradient(ellipse 70% 55% at 15% 20%, rgba(255, 255, 255, 0.75) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 45% at 88% 12%, rgba(0, 134, 165, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse 60% 50% at 70% 92%, rgba(255, 255, 255, 0.5) 0%, transparent 48%),
+    radial-gradient(circle at 40% 60%, rgba(227, 244, 247, 0.95) 0%, transparent 55%);
+}
+
+/* Hero pulse rings (subtle; disabled when user prefers reduced motion) */
+.hero-pulse-rings {
+  @apply pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.14];
+}
+
+.hero-pulse-rings span {
+  @apply absolute aspect-square w-[min(120vw,720px)] rounded-full border-2 border-brand;
+  animation: hero-ring-expand 7s linear infinite;
+}
+
+.hero-pulse-rings span:nth-child(2) {
+  animation-delay: 2.33s;
+}
+
+.hero-pulse-rings span:nth-child(3) {
+  animation-delay: 4.66s;
+}
+
+@keyframes hero-ring-expand {
+  0% {
+    transform: scale(0.15);
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pulse-rings {
+    display: none;
+  }
+}
+
+/* Dispatch map pin bob */
+@keyframes dispatch-pin {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-8px);
+  }
+}
+
+.dispatch-pin-wrap {
+  animation: dispatch-pin 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dispatch-pin-wrap {
+    animation: none;
+  }
+}
+
+/* Service tile on blue band */
+@layer utilities {
+  .card-service {
+    @apply rounded-2xl border border-slate-200/90 bg-white p-6 shadow-md transition-[transform,box-shadow] duration-200;
+  }
+
+  .card-service-icon {
+    @apply bg-brand/10 text-brand;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-service:hover {
+      @apply -translate-y-1.5 shadow-xl;
+    }
+
+    .card-service:hover .card-service-icon {
+      @apply bg-brand text-white shadow-md;
+    }
+
+    .card-service-photo:hover {
+      @apply -translate-y-1.5 shadow-xl;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-service:hover,
+    .card-service-photo:hover {
+      transform: none;
+    }
+  }
+}
+
+/* Footer subtle grid */
+.bg-trade-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Stagger child reveal (children fade in with incremental delay).
+   Only hides children while the ancestor .reveal has not been revealed yet;
+   prevents items from getting stuck hidden if JS doesn't run or the stagger
+   element itself is never directly observed. */
+.reveal:not(.reveal-visible) .stagger > * {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.reveal.reveal-visible .stagger > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.reveal.reveal-visible .stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal.reveal-visible .stagger > *:nth-child(2) { transition-delay: 80ms; }
+.reveal.reveal-visible .stagger > *:nth-child(3) { transition-delay: 160ms; }
+.reveal.reveal-visible .stagger > *:nth-child(4) { transition-delay: 240ms; }
+.reveal.reveal-visible .stagger > *:nth-child(5) { transition-delay: 320ms; }
+.reveal.reveal-visible .stagger > *:nth-child(6) { transition-delay: 400ms; }
+.reveal.reveal-visible .stagger > *:nth-child(n+7) { transition-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal:not(.reveal-visible) .stagger > *,
+  .reveal.reveal-visible .stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Blog article prose */
+.prose-blog h2 {
+  @apply mt-8 text-xl font-black uppercase tracking-tight text-navy sm:text-2xl;
+}
+.prose-blog h3 {
+  @apply mt-6 text-lg font-black text-navy;
+}
+.prose-blog ul {
+  @apply list-disc space-y-1.5 pl-6;
+}
+.prose-blog ol {
+  @apply list-decimal space-y-1.5 pl-6;
+}
+.prose-blog strong {
+  @apply text-navy;
+}
+.prose-blog a {
+  @apply font-bold text-brand underline underline-offset-2 hover:text-brand-dark;
+}
+
+/* Gentle pulse for primary Call CTA that draws the eye without being obnoxious */
+@keyframes cta-phone-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55), 0 10px 25px -8px rgba(220, 38, 38, 0.6); }
+  60% { box-shadow: 0 0 0 14px rgba(239, 68, 68, 0), 0 10px 25px -8px rgba(220, 38, 38, 0.6); }
+}
+
+.cta-phone-pulse {
+  animation: cta-phone-pulse 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-phone-pulse {
+    animation: none;
+  }
+}

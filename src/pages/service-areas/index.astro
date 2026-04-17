@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../../components/BreadcrumbJsonLd.astro';
+import { locations } from '../../data/locations';
+import { siteConfig } from '../../site.config';
+
+const title = "Service Areas | Floyd's Plumbing Ocala & Marion County";
+const description =
+  "Floyd's Plumbing serves Ocala, Belleview, Dunnellon, Silver Springs Shores, Summerfield, Anthony, and all of Marion County, FL. Licensed, 24/7 emergency.";
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">Service Areas</li>
+        </ol>
+      </nav>
+      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Service Areas</h1>
+      <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
+        Based in Ocala, we cover roughly a 20-mile radius across Marion County. Typical response under 45 minutes.
+      </p>
+    </div>
+  </div>
+
+  <div class="reveal mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {locations.map((l) => (
+        <li>
+          <a href={`/service-areas/${l.slug}/`} class="card-service group flex h-full flex-col">
+            <div class="flex items-center gap-3">
+              <span class="flex h-11 w-11 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-2.003 3.5-4.697 3.5-8.327a8 8 0 10-16 0c0 3.63 1.556 6.324 3.5 8.327a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              <div>
+                <h2 class="text-lg font-black uppercase text-navy">{l.city}</h2>
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">{l.county}</p>
+              </div>
+            </div>
+            <p class="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{l.shortDescription}</p>
+            <span class="mt-4 text-sm font-bold text-brand transition group-hover:translate-x-0.5">View details →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-12 rounded-2xl border border-slate-200 bg-page-muted p-8 text-center">
+      <h2 class="text-xl font-black uppercase text-navy">Don't see your town?</h2>
+      <p class="mt-2 text-slate-600">
+        We also cover Citra, McIntosh, Reddick, Sparr, Fort McCoy, Weirsdale, Stone Creek, and Colessa. Give us a call; if you're close, we'll let you know.
+      </p>
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={`tel:${siteConfig.phoneTel}`} class="inline-flex items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-red-700">
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center rounded-full bg-navy px-7 py-3 text-sm font-black uppercase tracking-wide text-white shadow-sm hover:bg-charcoal-dark">
+          Ask Online
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <BreadcrumbJsonLd crumbs={[{ name: 'Home', item: '/' }, { name: 'Service Areas', item: '/service-areas/' }]} />
+</BaseLayout>
