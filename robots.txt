@@ -1,0 +1,9 @@
+# https://floydsplumbing.com/robots.txt
+User-agent: *
+Allow: /
+
+# Don't crawl legal placeholders
+Disallow: /privacy/
+Disallow: /terms/
+
+Sitemap: https://floydsplumbing.com/sitemap-index.xml
