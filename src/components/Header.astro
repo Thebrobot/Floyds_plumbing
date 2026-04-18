@@ -30,20 +30,20 @@ const navLinkBase =
 >
   <div class="mx-auto w-full max-w-7xl px-3 pt-1.5 pb-1.5 sm:px-5 sm:pt-7 sm:pb-3 md:pt-8">
     <div
-      class="header-main flex w-full items-center gap-2 overflow-visible rounded-full border border-slate-200/90 bg-white px-3 py-2.5 shadow-md sm:gap-3 sm:px-4 sm:py-3 md:gap-4 md:px-5 lg:px-6"
+      class="header-main relative flex w-full items-center gap-2 overflow-visible rounded-full border border-slate-200/90 bg-white px-3 py-2.5 shadow-md sm:gap-3 sm:px-4 sm:py-3 md:gap-4 md:px-5 lg:px-6"
     >
-    <!-- Logo -->
+    <!-- Logo: centered on mobile via absolute, flows normally on desktop -->
     <a
       href="/"
       aria-label={`${siteConfig.businessName} - Home`}
-      class="flex shrink-0 items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      class="absolute left-1/2 -translate-x-1/2 flex items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:relative md:left-auto md:shrink-0 md:translate-x-0"
     >
       <img
         src={siteConfig.logoPath}
         alt={siteConfig.businessName}
         width="938"
         height="375"
-        class="header-logo h-11 w-auto max-w-[200px] object-contain object-left sm:h-12 sm:max-w-[240px] md:max-w-[260px]"
+        class="header-logo h-14 w-auto max-w-[220px] object-contain object-center md:h-12 md:max-w-[240px] lg:max-w-[260px] md:object-left"
         loading="eager"
         decoding="async"
       />
