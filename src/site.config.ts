@@ -49,7 +49,7 @@ export const siteConfig = {
   /** Google Reviews rating aggregate (displayed in hero + schema.org aggregateRating). */
   rating: {
     value: 4.9, // TODO: sync with real Google rating
-    count: 87   // TODO: sync with real Google review count
+    count: 16   // TODO: sync with real Google review count
   },
   /** Business hours for JSON-LD + footer display. 24/7 emergency handled separately. */
   hours: [
