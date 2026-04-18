@@ -24,7 +24,7 @@ export const services: Service[] = [
     title: 'New Construction & Custom Homes',
     navTitle: 'New Construction',
     category: 'main',
-    heroImage: '/images/services/service-new-construction.jpg',
+    heroImage: '/images/services/service-new-construction.webp',
     heroImageAlt: 'Plumber roughing in PEX and PVC drain lines during new construction of a Florida home',
     shortDescription:
       'Rough-in to trim for custom homes: detail-driven work for builders who care about fit, finish, and long-term reliability.',
@@ -49,7 +49,7 @@ export const services: Service[] = [
     title: 'Residential Plumbing',
     navTitle: 'Residential',
     category: 'main',
-    heroImage: '/images/services/service-residential.jpg',
+    heroImage: '/images/services/service-residential.webp',
     heroImageAlt: 'Plumber servicing a supply line under a residential kitchen sink',
     shortDescription:
       'Whole-home plumbing for Ocala families: leaks, fixtures, water heaters, and upgrades done right the first time.',
@@ -74,7 +74,7 @@ export const services: Service[] = [
     title: 'Commercial Plumbing & Maintenance Plans',
     navTitle: 'Commercial',
     category: 'main',
-    heroImage: '/images/services/service-commercial.jpg',
+    heroImage: '/images/services/service-commercial.webp',
     heroImageAlt: 'Plumber working on commercial kitchen drain lines in a Florida restaurant',
     shortDescription:
       'Restaurants, retail, and light commercial: proactive maintenance plans that keep your business open and code-ready.',
@@ -99,7 +99,7 @@ export const services: Service[] = [
     title: 'General Service & Repairs',
     navTitle: 'Repairs',
     category: 'main',
-    heroImage: '/images/services/service-repairs.jpg',
+    heroImage: '/images/services/service-repairs.webp',
     heroImageAlt: 'Close-up of plumber tightening a brass pressure-reducing valve on a copper water line',
     shortDescription:
       'Same-day priorities when possible, clear options, and repairs built to last. No quick patches that fail next season.',
@@ -124,7 +124,7 @@ export const services: Service[] = [
     title: 'Backflow Installation & Inspection',
     navTitle: 'Backflow Testing',
     category: 'main',
-    heroImage: '/images/services/service-backflow.jpg',
+    heroImage: '/images/services/service-backflow.webp',
     heroImageAlt: 'Certified plumber testing a brass backflow prevention assembly outside a Florida home',
     shortDescription:
       'Certified backflow assembly installation, testing, and paperwork handled so you stay compliant without the headache.',
@@ -149,7 +149,7 @@ export const services: Service[] = [
     title: 'Remodels & Repipes',
     navTitle: 'Remodels & Repipes',
     category: 'main',
-    heroImage: '/images/services/service-remodels-repipes.jpg',
+    heroImage: '/images/services/service-remodels-repipes.webp',
     heroImageAlt: 'Neat PEX manifold installation with blue and red PEX lines during a whole-home repipe',
     shortDescription:
       'Bath and kitchen remodels, polybutylene or aging pipe replacement, and whole-home repipes with minimal disruption.',

@@ -18,10 +18,10 @@ export const siteConfig = {
   phoneTel: '+13523046404',
   phoneDisplay: '(352) 304-6404',
   email: 'info@floydsplumbing.com',
-  /** Public path under /public */
-  logoPath: '/images/floyds-plumbing-logo.png',
-  /** Homepage hero (full-bleed). File: public/images/floyd-hero.png */
-  heroImagePath: '/images/floyd-hero.png',
+  /** Public path under /public (WebP; run `npm run optimize-images` after replacing source JPG/PNG) */
+  logoPath: '/images/floyds-plumbing-logo.webp',
+  /** Homepage hero (full-bleed). Optimized WebP in public/images */
+  heroImagePath: '/images/floyd-hero.webp',
   /** Google Business Profile or reviews URL - update when available */
   googleBusinessUrl: 'https://www.google.com/maps/search/?api=1&query=Floyd%27s+Plumbing+Ocala+FL',
   /** POST endpoint (Formspree, Basin, etc.). Empty = submit offers call-to-action fallback via client script. */

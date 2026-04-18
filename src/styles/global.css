@@ -1,11 +1,10 @@
 @import "tailwindcss";
-/* Font subset: we only use 400 (body), 600 (semibold), 700 (bold), 800 (black/display) */
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/inter/800.css";
-/* 900 (black) weight used for CTAs + headlines */
-@import "@fontsource/inter/900.css";
+/* Latin subset only — smaller than full unicode; weights used across the site */
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/inter/latin-800.css";
+@import "@fontsource/inter/latin-900.css";
 
 /* Floyd's Plumbing - logo: teal primary (#0086a5 family), green accent stripe, white + deep teal nav/footer */
 
@@ -134,6 +133,10 @@
 .hero-pulse-rings span {
   @apply absolute aspect-square w-[min(120vw,720px)] rounded-full border-2 border-brand;
   animation: hero-ring-expand 7s linear infinite;
+  /* Promote to own layer to avoid non-composited animation warnings on mobile */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .hero-pulse-rings span:nth-child(2) {
