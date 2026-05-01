@@ -38,21 +38,12 @@ const description =
         <a class="font-semibold text-brand underline decoration-brand/35 underline-offset-2 hover:decoration-brand" href={`tel:${siteConfig.phoneTel}`}>Call {siteConfig.phoneDisplay}</a>
         or <a class="font-semibold text-brand underline decoration-brand/35 underline-offset-2 hover:decoration-brand" href="/contact/">send a message</a>.
       </p>
-      <ul class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {mainServices.map((s, i) => {
-          const isLast = i === mainServices.length - 1;
-          return (
-          <li
-            class:list={[
-              isLast && 'sm:col-span-2 sm:flex sm:justify-center lg:col-span-1 lg:col-start-2 lg:block',
-            ]}
-          >
+      <ul class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {mainServices.map((s) => (
+          <li class="min-w-0">
             <a
               href={`/services/${s.slug}/`}
-              class:list={[
-                'card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200 hover:border-brand/35 hover:shadow-lg',
-                isLast && 'w-full max-w-md lg:max-w-none',
-              ]}
+              class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200 hover:border-brand/35 hover:shadow-lg"
             >
               <div class="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-brand/20 to-navy/30">
                 {s.heroImage ? (
@@ -86,8 +77,61 @@ const description =
               </div>
             </a>
           </li>
-        );
-        })}
+        ))}
+        <li class="min-w-0">
+          <a
+            href="/contact/"
+            class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-brand/35 bg-white shadow-md ring-1 ring-brand/15 transition-[transform,box-shadow] duration-200 hover:border-brand hover:shadow-lg"
+          >
+            <div class="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-brand to-navy">
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/80 via-brand/20 to-transparent" aria-hidden="true"></div>
+              <span
+                class="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow text-white shadow-lg ring-4 ring-white/90"
+                aria-hidden="true"
+              >
+                <ServiceIcon slug="residential" class="h-6 w-6" />
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col p-7">
+              <p class="text-xs font-black uppercase tracking-[0.2em] text-brand">Next step</p>
+              <h3 class="mt-1 text-xl font-black uppercase tracking-tight text-navy">Request service online</h3>
+              <p class="mt-3 flex-1 text-slate-600">
+                Tell us what you need—we&apos;ll follow up with timing and clear pricing before we roll a truck.
+              </p>
+              <span class="mt-5 text-sm font-black uppercase tracking-wide text-brand transition group-hover:translate-x-0.5">
+                Book online →
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="min-w-0">
+          <a
+            href="/services/emergency-plumber/"
+            class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-red-200/90 bg-white shadow-md ring-1 ring-red-100 transition-[transform,box-shadow] duration-200 hover:border-red-400/80 hover:shadow-lg"
+          >
+            <div class="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-red-700 via-red-600 to-navy">
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/75 via-red-500/20 to-transparent" aria-hidden="true"></div>
+              <span
+                class="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow text-white shadow-lg ring-4 ring-white/90"
+                aria-hidden="true"
+              >
+                <ServiceIcon slug="emergency-plumber" class="h-6 w-6" />
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col p-7">
+              <p class="text-xs font-black uppercase tracking-[0.2em] text-red-700">24/7</p>
+              <h3 class="mt-1 text-xl font-black uppercase tracking-tight text-navy">Emergency plumber</h3>
+              <p class="mt-3 flex-1 text-slate-600">
+                Burst pipe, sewer backup, or no water—we answer when you can&apos;t wait. Call{' '}
+                <strong class="whitespace-nowrap text-navy">{siteConfig.phoneDisplay}</strong> now or open this page for what
+                to do first.
+              </p>
+              <span class="mt-5 text-sm font-black uppercase tracking-wide text-brand transition group-hover:translate-x-0.5">
+                Emergency help →
+              </span>
+            </div>
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -97,7 +141,7 @@ const description =
       <p class="mt-3 max-w-3xl text-base text-slate-600">
         Focused pages for common jobs—scope, timing, and how to get a pro on site when you need it.
       </p>
-      <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {subServices.map((s) => (
           <li>
             <a
