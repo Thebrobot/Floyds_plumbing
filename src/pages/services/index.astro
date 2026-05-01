@@ -33,9 +33,13 @@ const description =
     <div>
       <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Main Categories</p>
       <h2 class="mt-2 text-2xl font-black uppercase text-navy">Core Plumbing Services</h2>
-      <ul class="mt-6 grid gap-6 sm:grid-cols-2">
-        {mainServices.map((s) => (
-          <li>
+      <ul class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {mainServices.map((s, i) => (
+          <li
+            class:list={[
+              i === mainServices.length - 1 && 'sm:col-span-2 lg:col-span-3',
+            ]}
+          >
             <a
               href={`/services/${s.slug}/`}
               class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200"
