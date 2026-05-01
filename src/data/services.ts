@@ -177,6 +177,9 @@ export const services: Service[] = [
     title: '24/7 Emergency Plumber',
     navTitle: 'Emergency Service',
     category: 'sub',
+    heroImage: '/images/services/service-emergency.webp',
+    heroImageAlt:
+      'Plumber with flashlight working on pipes under a kitchen sink during an emergency repair call',
     shortDescription:
       'Burst pipe, no water, sewer backup? We answer nights and weekends. Shut off the main and call us now.',
     metaDescription:
