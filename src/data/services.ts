@@ -345,6 +345,9 @@ export const services: Service[] = [
     title: 'Farm & Agricultural Plumbing',
     navTitle: 'Farm Plumbing',
     category: 'main',
+    heroImage: '/images/services/service-farm-plumbing.webp',
+    heroImageAlt:
+      'Plumber working on water lines at a Florida barn wash area with a horse nearby',
     shortDescription:
       'Barns, shops, wash bays, and rural outbuildings: domestic lines, hose bibs, utility sinks, and code-ready installs for working properties.',
     metaDescription:
