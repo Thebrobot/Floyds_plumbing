@@ -344,7 +344,7 @@ export const services: Service[] = [
     slug: 'farm-plumbing',
     title: 'Farm & Agricultural Plumbing',
     navTitle: 'Farm Plumbing',
-    category: 'sub',
+    category: 'main',
     shortDescription:
       'Barns, shops, wash bays, and rural outbuildings: domestic lines, hose bibs, utility sinks, and code-ready installs for working properties.',
     metaDescription:
