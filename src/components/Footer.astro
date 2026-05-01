@@ -17,7 +17,7 @@ const dayLabel: Record<string, string> = {
 };
 const formatDays = (days: readonly string[]) => {
   if (days.length === 1) return dayLabel[days[0]];
-  return `${dayLabel[days[0]]}–${dayLabel[days[days.length - 1]]}`;
+  return `${dayLabel[days[0]]} to ${dayLabel[days[days.length - 1]]}`;
 };
 const formatTime = (t: string) => {
   const [h, m] = t.split(':').map((x) => parseInt(x, 10));
@@ -90,7 +90,7 @@ const formatTime = (t: string) => {
             </svg>
             <span class="leading-snug text-slate-400">
               {hours.map((h) => (
-                <span class="block">{formatDays(h.days)}: {formatTime(h.opens)}–{formatTime(h.closes)}</span>
+                <span class="block">{formatDays(h.days)}: {formatTime(h.opens)} to {formatTime(h.closes)}</span>
               ))}
               {siteConfig.emergency24_7 && (
                 <span class="mt-1 block font-bold text-amber-400">Emergencies 24/7</span>

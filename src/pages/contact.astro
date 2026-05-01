@@ -92,7 +92,7 @@ const mapEmbedUrl = `https://www.google.com/maps?q=${siteConfig.serviceGeo.latit
                 <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Hours</p>
                 {siteConfig.hours.map((h) => (
                   <p class="text-sm font-bold text-navy">
-                    {h.days[0]}{h.days.length > 1 ? `–${h.days[h.days.length - 1]}` : ''}: {h.opens} – {h.closes}
+                    {h.days[0]}{h.days.length > 1 ? ` to ${h.days[h.days.length - 1]}` : ''}: {h.opens} to {h.closes}
                   </p>
                 ))}
                 {siteConfig.emergency24_7 && (

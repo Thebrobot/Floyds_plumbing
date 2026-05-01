@@ -41,7 +41,7 @@ export const locations: Location[] = [
       'Whether you need a same-day water heater swap, a whole-home repipe, or backflow testing for your irrigation, we show up on time, price it straight, and clean up after.'
     ],
     highlights: [
-      'Under-45-minute response within city limits',
+      'Usually within 45 minutes inside city limits',
       '24/7 emergency dispatch',
       'Experienced with On Top of the World, The Villages area, Stone Creek, and Calesa Township',
       'Florida Certified Plumbing Contractor'
@@ -102,13 +102,13 @@ export const locations: Location[] = [
       "Plumbers in Silver Springs Shores, FL. Floyd's Plumbing handles repairs, water heaters, drain cleaning, and backflow testing.",
     neighborhoods: ['Baseline Rd corridor', 'SE 95th Street', 'Silver Springs Shores North', 'Silver Springs Shores South'],
     paragraphs: [
-      "Silver Springs Shores is close to home for us, typically 20-30 minutes from our Ocala dispatch even during rush hour. The mix of 70s/80s tract homes and newer construction keeps us busy with everything from fixture upgrades to full repipes.",
+      "Silver Springs Shores is close to home for us, typically 20 to 30 minutes from our Ocala dispatch even during rush hour. The mix of 70s/80s tract homes and newer construction keeps us busy with everything from fixture upgrades to full repipes.",
       "Pressure-reducing valves tend to fail around the 15-year mark here, and that is the single biggest cause of pinhole leaks in copper. Ask us to check yours while we are on site for any other service."
     ],
     highlights: [
-      'Fast 20-30 minute response',
+      'Fast response in 20 to 30 minutes',
       'Pressure regulator and PRV specialists',
-      'Experienced with 70s-90s tract homes',
+      'Experienced with 1970s through 1990s tract homes',
       'Upfront flat-rate pricing'
     ]
   },

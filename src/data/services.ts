@@ -215,7 +215,7 @@ export const services: Service[] = [
       'We install and service AO Smith, Rheem, Bradford White, Rinnai, Navien, and more. Permits, pans, expansion tanks, and code-required upgrades included in every quote.'
     ],
     checklist: [
-      'Tank water heater repair and replacement (30–80 gal)',
+      'Tank water heater repair and replacement (30 to 80 gal)',
       'Tankless install, descale, and flow sensor service',
       'T&P valve, expansion tank, and drain pan upgrades',
       'Gas line sizing verification for BTU upgrades',

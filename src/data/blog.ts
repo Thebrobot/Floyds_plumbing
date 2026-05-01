@@ -69,7 +69,7 @@ export const posts: BlogPost[] = [
 <h2>5. Multiple repairs in one year</h2>
 <p>If you've called us (or anyone) more than twice in the past year for plumbing leaks, the math usually favors a repipe.</p>
 
-<p>We offer free repipe estimates and financing through Wisetack. Most whole-home repipes in Ocala run 2–4 days with water restored every night.</p>
+<p>We offer free repipe estimates and financing through Wisetack. Most whole-home repipes in Ocala run 2 to 4 days with water restored every night.</p>
     `
   },
   {
@@ -87,7 +87,7 @@ export const posts: BlogPost[] = [
 <p>Backflow assemblies keep contaminated water from flowing backwards into the public drinking supply. Without them, a pressure drop in the main could pull fertilizer, sewage, or chemicals into your neighbor's tap. That's why the test is legally required.</p>
 
 <h2>How the test works</h2>
-<p>A certified tester shows up with a calibrated test kit, shuts off downstream water, and verifies that the check valves and relief valve in your assembly close properly. The test takes 15–30 minutes per assembly. We file the paperwork directly with your utility.</p>
+<p>A certified tester shows up with a calibrated test kit, shuts off downstream water, and verifies that the check valves and relief valve in your assembly close properly. The test takes 15 to 30 minutes per assembly. We file the paperwork directly with your utility.</p>
 
 <h2>What if it fails?</h2>
 <p>Most failures are fixable with a rebuild kit (springs and seals). We usually carry kits on the truck for the common models: Watts 909, Wilkins 975XL, Febco 860, and Zurn 375. If the whole assembly is corroded or out of spec, we replace it.</p>
@@ -112,7 +112,7 @@ export const posts: BlogPost[] = [
 
 <h2>What hard water does</h2>
 <ul>
-  <li>Scales up water heaters (cuts efficiency by 20–30% after a few years)</li>
+  <li>Scales up water heaters (cuts efficiency by 20 to 30% after a few years)</li>
   <li>Shortens tankless water heater life dramatically if not treated</li>
   <li>Clogs fixtures, especially shower heads and faucet aerators</li>
   <li>Leaves spots on glassware and streaks on shower doors</li>
@@ -123,7 +123,7 @@ export const posts: BlogPost[] = [
 <h2>How to fix it</h2>
 <p>A properly sized water softener solves almost all of it. We test your water on-site and size the unit to your household's usage and the actual hardness of your specific supply. For well water with iron or sulfur, we add pre-treatment.</p>
 
-<p>If you're on a budget, a whole-home softener is usually $1,800–$2,800 installed. Tankless water heater owners: a softener plus annual descaling will double the life of your unit.</p>
+<p>If you're on a budget, a whole-home softener is usually $1,800 to $2,800 installed. Tankless water heater owners: a softener plus annual descaling will double the life of your unit.</p>
     `
   }
 ];

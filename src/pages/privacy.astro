@@ -5,6 +5,7 @@ import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
 const title = "Privacy Policy | Floyd's Plumbing LLC";
 const description =
   "How Floyd's Plumbing LLC collects, uses, shares, and protects personal information when you use our Ocala plumbing services or visit our website.";
+const termsOfServiceUrl = new URL('/terms/', import.meta.env.SITE).href;
 ---
 
 <BaseLayout {title} {description}>
@@ -122,8 +123,8 @@ const description =
             5. Text Messaging &amp; Communications
           </h2>
           <p>
-            If you provide your mobile phone number to Floyd's Plumbing through any channel — including our website,
-            contact forms, or by phone — you consent to receive SMS text messages from us related to appointment
+            If you provide your mobile phone number to Floyd's Plumbing through any channel, including our website,
+            contact forms, or by phone, you consent to receive SMS text messages from us related to appointment
             confirmations, technician dispatch notifications, service estimates, billing reminders, and general customer
             service communications.
           </p>
@@ -139,7 +140,7 @@ const description =
           </p>
           <p>
             For full details on how SMS communications are handled, including message types and frequency, please review
-            our Terms of Service at [insert Terms of Service URL].
+            our <a class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark" href={termsOfServiceUrl}>Terms of Service</a>.
           </p>
         </section>
 
