@@ -34,7 +34,7 @@ export const services: Service[] = [
     paragraphs: [
       'Custom homes demand more than speed; they demand sequencing, coordination, and pride in the small details. Our crews work with builders and homeowners who want plumbing that disappears into the architecture until you need it.',
       'From underground to trim-out, we prioritize clean layouts, accessible shutoffs, and long-term serviceability so future maintenance does not turn into demolition.',
-      'If you are planning a new build in Ocala, Stone Creek, Colessa, or elsewhere in Marion County, bring us in early. We will help you avoid expensive rework before drywall goes up.'
+      'If you are planning a new build in Ocala, On Top of the World, The Villages area, Stone Creek, Calesa Township, or elsewhere in Marion County, bring us in early. We will help you avoid expensive rework before drywall goes up.'
     ],
     checklist: [
       'Rough-in layout reviews with your superintendent or builder',
@@ -59,15 +59,15 @@ export const services: Service[] = [
     paragraphs: [
       'Your home should feel predictable: steady pressure, quiet lines, and fixtures that work every day without drama. When something feels off (a rumble in the wall, a warm spot on the slab, a slow drain), we diagnose first and quote clearly.',
       'Whether it is a water heater swap, a toilet rebuild, or a hidden leak, we treat your floors, walls, and schedules with respect.',
-      'Serving families across our Marion County service radius, including Stone Creek and Colessa.'
+      'Serving families across our Marion County service radius, including On Top of the World, The Villages area, Stone Creek, and Calesa Township.'
     ],
     checklist: [
-      'Leak detection and repair',
+      'Leak repair and diagnostics',
       'Water heater repair and replacement',
       'Fixture upgrades and valve replacements',
       'Whole-home pressure and safety checks when needed'
     ],
-    related: ['water-heaters', 'leak-detection', 'repairs']
+    related: ['water-heaters', 'repairs', 'emergency-plumber']
   },
   {
     slug: 'commercial',
@@ -117,7 +117,7 @@ export const services: Service[] = [
       'Slab and wall leak coordination',
       'Pressure-reducing valve and expansion tank service'
     ],
-    related: ['emergency-plumber', 'drain-cleaning', 'leak-detection']
+    related: ['emergency-plumber', 'drain-cleaning', 'residential']
   },
   {
     slug: 'backflow',
@@ -159,7 +159,7 @@ export const services: Service[] = [
     paragraphs: [
       'Remodels are where plumbing meets design, and where small mistakes become expensive tile repairs. We coordinate with your contractor on rough heights, valve locations, and access panels before finishes go in.',
       'Whole-home repipes are a specialty: we sequence walls, attic, and crawl paths to keep your family comfortable while water is restored every night when possible.',
-      'Serving Ocala and nearby Marion County neighborhoods including Stone Creek and Colessa.'
+      'Serving Ocala and nearby Marion County neighborhoods including On Top of the World, The Villages area, Stone Creek, and Calesa Township.'
     ],
     checklist: [
       'Kitchen and bath rough-in and trim',
@@ -172,6 +172,30 @@ export const services: Service[] = [
   // ------------------------------------------------------------------
   // SUB-SERVICES (long-tail SEO pages)
   // ------------------------------------------------------------------
+  {
+    slug: 'emergency-plumber',
+    title: '24/7 Emergency Plumber',
+    navTitle: 'Emergency Service',
+    category: 'sub',
+    shortDescription:
+      'Burst pipe, no water, sewer backup? We answer nights and weekends. Shut off the main and call us now.',
+    metaDescription:
+      "24/7 emergency plumber in Ocala, FL. Burst pipes, sewer backups, no hot water. Floyd's Plumbing answers after hours.",
+    keywords: ['emergency plumber Ocala', '24/7 plumber Ocala', 'after hours plumber Ocala'],
+    paragraphs: [
+      "When water is where it should not be, every minute matters. Our dispatch answers 24/7 and our on-call technician can usually be rolling within an hour.",
+      'Before we arrive: shut off the main water supply at the meter or the street valve, and kill power to the water heater if the leak is near it. Snap photos for your insurance.',
+      "We will give you a straight price over the phone before we dispatch, with no bait-and-switch once the truck is in your driveway."
+    ],
+    checklist: [
+      'Burst pipe isolation and repair',
+      'Main line backup clearing',
+      'Water heater failure (leaks and floods)',
+      'After-hours sump/ejector pump failures',
+      'Gas leak response and line isolation'
+    ],
+    related: ['repairs', 'drain-cleaning', 'residential']
+  },
   {
     slug: 'water-heaters',
     title: 'Water Heater Repair & Installation',
@@ -242,7 +266,7 @@ export const services: Service[] = [
       'Sewer camera inspection with recorded footage',
       'Cleanout installation when access is blocked'
     ],
-    related: ['sewer-line', 'leak-detection', 'emergency-plumber']
+    related: ['sewer-line', 'repairs', 'emergency-plumber']
   },
   {
     slug: 'sewer-line',
@@ -267,30 +291,6 @@ export const services: Service[] = [
       'Permit coordination with Marion County or City of Ocala'
     ],
     related: ['drain-cleaning', 'repairs', 'backflow']
-  },
-  {
-    slug: 'leak-detection',
-    title: 'Leak Detection & Slab Leak Repair',
-    navTitle: 'Leak Detection',
-    category: 'sub',
-    shortDescription:
-      'High water bill or warm spot on the slab? Non-invasive leak detection and targeted repair, with no demo hunting.',
-    metaDescription:
-      "Leak detection and slab leak repair in Ocala, FL. Acoustic, thermal, and pressure testing. Floyd's Plumbing.",
-    keywords: ['leak detection Ocala', 'slab leak Ocala', 'water leak Ocala'],
-    paragraphs: [
-      'Hidden leaks cost more than the water bill. They warp floors, rot cabinets, and breed mold, and we find them without tearing up your house on a guess.',
-      'Acoustic equipment, pressure isolation, and thermal imaging tell us where the leak is before a saw touches a slab. Then we fix just the section that failed or reroute overhead if that makes more sense.',
-      'Most insurance policies cover the access and repair but not the plumbing fix itself; we write our invoice in a way that makes your claim easier.'
-    ],
-    checklist: [
-      'Acoustic and pressure-based leak isolation',
-      'Slab leak spot repair or overhead rerouting',
-      'Pinhole leak and pinhole cluster assessment',
-      'Documentation suitable for insurance claims',
-      'Pressure-reducing valve check (the #1 cause of pinholes)'
-    ],
-    related: ['remodels-repipes', 'water-heaters', 'repairs']
   },
   {
     slug: 'gas-lines',
@@ -338,29 +338,29 @@ export const services: Service[] = [
       'Under-sink reverse osmosis with dedicated faucet',
       'Bypass valves and drain routing done to code'
     ],
-    related: ['tankless-water-heaters', 'residential', 'well-pumps']
+    related: ['tankless-water-heaters', 'residential', 'farm-plumbing']
   },
   {
-    slug: 'well-pumps',
-    title: 'Well Pumps & Pressure Tanks',
-    navTitle: 'Well Pumps',
+    slug: 'farm-plumbing',
+    title: 'Farm & Agricultural Plumbing',
+    navTitle: 'Farm Plumbing',
     category: 'sub',
     shortDescription:
-      'No water at the tap? Pressure switch, pressure tank, jet pump, and submersible pump service across Marion County.',
+      'Barns, shops, wash bays, and rural outbuildings: domestic lines, hose bibs, utility sinks, and code-ready installs for working properties.',
     metaDescription:
-      "Well pump service in Ocala and Marion County, FL. Pressure tanks, switches, jet and submersible pumps. Floyd's Plumbing.",
-    keywords: ['well pump Ocala', 'well pump repair Marion County', 'pressure tank Ocala'],
+      "Farm and agricultural plumbing in Marion County, FL. Barn water lines, hydrants, wash pits, and rural upgrades. Floyd's Plumbing.",
+    keywords: ['farm plumber Ocala', 'barn plumbing Marion County', 'agricultural plumbing Florida'],
     paragraphs: [
-      'Well systems are everywhere in rural Marion County, and they fail in predictable ways: waterlogged tanks, worn pressure switches, or a submersible pump that has finally given up after 15 years of service.',
-      'We diagnose first. A pump pulled unnecessarily is an expensive mistake. When replacement is the right call, we size the pump and tank to your well depth, yield, and household demand.',
-      'We handle constant-pressure (VFD) upgrades for homeowners who want city-like pressure without a giant tank.'
+      'Rural properties need plumbing that stands up to daily use: freeze-safe hose connections where possible, durable materials in wash areas, and layouts that keep shutoffs easy to find when you are in a hurry.',
+      'We work with homeowners and small operations on barn water, equipment wash-down, additional hose bibs, utility sinks, and domestic lines to outbuildings, always permitted and inspected where code requires.',
+      'We coordinate with your well and filtration vendors when needed; our focus is the piping, valves, drains, and fixtures on the building side.'
     ],
     checklist: [
-      'Pressure switch and gauge diagnosis',
-      'Pressure tank air charge / replacement',
-      'Jet pump and submersible pump replacement',
-      'Constant-pressure (VFD) system upgrades',
-      'Pitless adapter and wellhead service'
+      'Barn and outbuilding domestic water runs',
+      'Utility sinks, floor drains, and wash bay rough-in',
+      'Hose bib and hydrant line installs or replacements',
+      'Pressure and freeze-protection planning for exposed lines',
+      'Coordination with water treatment on the building side'
     ],
     related: ['water-softeners', 'residential', 'repairs']
   },
@@ -385,30 +385,6 @@ export const services: Service[] = [
       'Basin cleaning and sizing upgrades'
     ],
     related: ['drain-cleaning', 'repairs', 'remodels-repipes']
-  },
-  {
-    slug: 'emergency-plumber',
-    title: '24/7 Emergency Plumber',
-    navTitle: 'Emergency Service',
-    category: 'sub',
-    shortDescription:
-      'Burst pipe, no water, sewer backup? We answer nights and weekends. Shut off the main and call us now.',
-    metaDescription:
-      "24/7 emergency plumber in Ocala, FL. Burst pipes, sewer backups, no hot water. Floyd's Plumbing answers after hours.",
-    keywords: ['emergency plumber Ocala', '24/7 plumber Ocala', 'after hours plumber Ocala'],
-    paragraphs: [
-      "When water is where it should not be, every minute matters. Our dispatch answers 24/7 and our on-call technician can usually be rolling within an hour.",
-      'Before we arrive: shut off the main water supply at the meter or the street valve, and kill power to the water heater if the leak is near it. Snap photos for your insurance.',
-      "We will give you a straight price over the phone before we dispatch, with no bait-and-switch once the truck is in your driveway."
-    ],
-    checklist: [
-      'Burst pipe isolation and repair',
-      'Main line backup clearing',
-      'Water heater failure (leaks and floods)',
-      'After-hours sump/ejector pump failures',
-      'Gas leak response and line isolation'
-    ],
-    related: ['repairs', 'drain-cleaning', 'leak-detection']
   }
 ];
 

@@ -1,19 +1,7 @@
 ---
 import { locations } from '../data/locations';
 
-const primary = locations.map((l) => ({ name: l.city, href: `/service-areas/${l.slug}/` }));
-const additional = [
-  'Citra',
-  'McIntosh',
-  'Reddick',
-  'Sparr',
-  'Fort McCoy',
-  'Weirsdale',
-  'Stone Creek',
-  'Colessa'
-].map((n) => ({ name: n, href: '/service-areas/' }));
-
-const all = [...primary, ...additional];
+const areas = locations.map((l) => ({ name: l.city, href: `/service-areas/${l.slug}/` }));
 ---
 
 <section id="service-areas" class="bg-navy py-16 md:py-20" aria-labelledby="service-areas-heading">
@@ -30,7 +18,7 @@ const all = [...primary, ...additional];
 
     <!-- Mobile: clean pin list -->
     <ul class="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 sm:hidden">
-      {all.map((area) => (
+      {areas.map((area) => (
         <li>
           <a href={area.href} class="flex items-center gap-2 rounded-md px-1 py-1 hover:text-yellow">
             <svg class="h-3.5 w-3.5 shrink-0 text-yellow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -44,7 +32,7 @@ const all = [...primary, ...additional];
 
     <!-- Desktop: pill buttons -->
     <ul class="mt-10 hidden grid-cols-3 gap-3 sm:grid md:grid-cols-4">
-      {all.map((area) => (
+      {areas.map((area) => (
         <li>
           <a
             href={area.href}

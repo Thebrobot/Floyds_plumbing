@@ -19,7 +19,7 @@ export const siteConfig = {
   phoneDisplay: '(352) 304-6404',
   email: 'info@floydsplumbing.com',
   /** Public path under /public (WebP; run `npm run optimize-images` after replacing source JPG/PNG) */
-  logoPath: '/images/floyds-plumbing-logo.webp',
+  logoPath: '/images/floyds-plumbing-logo-trans.webp',
   /** Homepage hero (full-bleed). Optimized WebP in public/images */
   heroImagePath: '/images/floyd-hero.webp',
   /** Google Business Profile or reviews URL - update when available */

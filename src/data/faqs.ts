@@ -23,7 +23,7 @@ export const faqs: Faq[] = [
   {
     question: 'What areas do you serve?',
     answer:
-      'We serve Ocala and the surrounding Marion County area within roughly a 20-mile radius, including Belleview, Dunnellon, Silver Springs Shores, Anthony, Citra, Summerfield, Stone Creek, and Colessa.'
+      'We serve Ocala and the surrounding Marion County area within roughly a 20-mile radius, including Belleview, Dunnellon, Silver Springs Shores, Summerfield, Anthony, The Villages, On Top of the World, Stone Creek, Calesa Township, Citra, McIntosh, Reddick, Sparr, Fort McCoy, Weirsdale, and nearby communities.'
   },
   {
     question: 'Do you offer financing?',

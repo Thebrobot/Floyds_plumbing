@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '../site.config';
 import { mainServices, subServices } from '../data/services';
+import { locations } from '../data/locations';
 
 const { streetAddress, addressLocality, addressRegion, postalCode } = siteConfig.address;
 const hasStreet = Boolean(streetAddress && streetAddress.trim());
@@ -33,7 +34,7 @@ const formatTime = (t: string) => {
       <!-- Col 1: Brand / Contact -->
       <div class="col-span-2 lg:col-span-2">
         <img
-          src="/images/floyds-plumbing-logo-trans.webp"
+          src={siteConfig.logoPath}
           alt={siteConfig.businessName}
           width="938"
           height="375"
@@ -170,13 +171,16 @@ const formatTime = (t: string) => {
       <div>
         <p class="text-xs font-black uppercase tracking-widest text-yellow">Service Areas</p>
         <ul class="mt-4 space-y-2.5 text-sm font-semibold">
-          <li><a class="hover:text-yellow" href="/service-areas/ocala/">Ocala</a></li>
-          <li><a class="hover:text-yellow" href="/service-areas/belleview/">Belleview</a></li>
-          <li><a class="hover:text-yellow" href="/service-areas/dunnellon/">Dunnellon</a></li>
-          <li><a class="hover:text-yellow" href="/service-areas/silver-springs-shores/">Silver Springs Shores</a></li>
-          <li><a class="hover:text-yellow" href="/service-areas/summerfield/">Summerfield</a></li>
-          <li><a class="hover:text-yellow" href="/service-areas/anthony/">Anthony</a></li>
-          <li class="pt-2"><a class="text-yellow hover:underline" href="/service-areas/">All Service Areas →</a></li>
+          {locations.map((l) => (
+            <li>
+              <a class="hover:text-yellow" href={`/service-areas/${l.slug}/`}>
+                {l.city}
+              </a>
+            </li>
+          ))}
+          <li class="pt-2">
+            <a class="text-yellow hover:underline" href="/service-areas/">Browse all areas →</a>
+          </li>
         </ul>
       </div>
 

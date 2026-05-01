@@ -1,15 +1,233 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
 
-const title = "Terms of Service | Floyd's Plumbing";
-const description = "Terms of service placeholder for Floyd's Plumbing.";
+const title = "Terms of Service | Floyd's Plumbing LLC";
+const description =
+  "Terms of Service for Floyd's Plumbing LLC — Ocala plumbing services, appointments, SMS messaging, warranties, and policies.";
+const privacyPolicyUrl = new URL('/privacy/', import.meta.env.SITE).href;
 ---
 
-<BaseLayout {title} {description} noIndex>
-  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-    <h1 class="font-display text-3xl uppercase text-navy">Terms of Service</h1>
-    <p class="mt-6 text-slate-600">
-      This page is a placeholder. Replace with your attorney-approved terms before launch.
-    </p>
+<BaseLayout {title} {description}>
+  <div class="relative border-b border-slate-200/80 bg-hero">
+    <div class="bg-ripple pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <nav class="text-sm font-semibold text-brand-dark" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-2">
+          <li><a class="underline decoration-brand/30 underline-offset-4 hover:text-brand" href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-bold text-navy">Terms of Service</li>
+        </ol>
+      </nav>
+      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Terms of Service</h1>
+      <p class="mt-4 text-lg font-semibold text-slate-700">Effective Date: April 30, 2026</p>
+    </div>
   </div>
+
+  <article class="bg-page py-14">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="space-y-10 text-base leading-relaxed text-slate-700">
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">1. Agreement to Terms</h2>
+          <p>
+            By contacting Floyd's Plumbing LLC, submitting a service request, using our website, or providing your contact
+            information through any form or channel, you agree to these Terms of Service. If you do not agree, please do not
+            use our services or submit your information.
+          </p>
+          <p>
+            Floyd's Plumbing LLC ("Floyd's Plumbing," "we," "us," or "our") is a licensed plumbing contractor located at 4145
+            SE 47th Pl, Ocala, FL 34480.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">2. Services</h2>
+          <p>
+            Floyd's Plumbing provides residential and commercial plumbing services including but not limited to installation,
+            repair, and maintenance of water heaters, toilets, faucets, showers, drain lines, sewer lines, and related
+            plumbing systems. Service availability, scheduling, and pricing are subject to change without notice.
+          </p>
+          <p>
+            All work is performed by licensed plumbing professionals in accordance with Florida state regulations and
+            applicable local codes.
+          </p>
+        </section>
+
+        <section class="space-y-6">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">3. SMS / Text Messaging Terms</h2>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3a. Consent to Receive SMS Messages</h3>
+            <p>
+              By providing your mobile phone number to Floyd's Plumbing — whether through our website contact form, booking
+              form, phone call, or any other channel — you expressly consent to receive text messages (SMS) from Floyd's
+              Plumbing LLC at the number provided. Your consent is not a condition of purchasing any service.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3b. Types of Messages You May Receive</h3>
+            <p>You may receive SMS messages related to:</p>
+            <ul class="list-disc space-y-2 pl-5">
+              <li>Appointment confirmations and reminders</li>
+              <li>Technician dispatch notifications and estimated arrival times</li>
+              <li>Service estimates and follow-up communications</li>
+              <li>Billing and payment reminders</li>
+              <li>Responses to inquiries you have submitted</li>
+              <li>General customer service communications</li>
+            </ul>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3c. Message Frequency</h3>
+            <p>
+              Message frequency will vary based on your service activity and interactions with Floyd's Plumbing. You may
+              receive up to 5 messages per service request or appointment cycle.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3d. Message and Data Rates</h3>
+            <p>Message and data rates may apply. You are responsible for any charges assessed by your mobile carrier.</p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3e. How to Opt Out</h3>
+            <p>
+              You may opt out of SMS communications at any time by replying STOP to any text message you receive from us.
+              After opting out, you will receive a single confirmation message and no further messages will be sent unless you
+              re-subscribe.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3f. How to Get Help</h3>
+            <p>
+              Reply HELP to any message for assistance, or contact us directly at (352) 304-6404 or kenny@floydtheplumber.com.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3g. Supported Carriers</h3>
+            <p>
+              SMS messaging is available on all major U.S. carriers including AT&T, T-Mobile, Verizon, and others. Carrier
+              support may vary.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-navy">3h. No Sharing of Phone Numbers</h3>
+            <p>
+              We do not sell, rent, or share your mobile phone number or SMS opt-in data with third parties for their own
+              marketing purposes.
+            </p>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">4. Appointments & Scheduling</h2>
+          <p>
+            Scheduling a service appointment does not guarantee a specific arrival time. We will make reasonable efforts to
+            arrive within any communicated window. Floyd's Plumbing reserves the right to reschedule appointments due to
+            emergencies, weather, or other unforeseen circumstances.
+          </p>
+          <p>
+            Cancellations or reschedules requested with less than 24 hours notice may result in a service fee at our
+            discretion.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">5. Estimates & Pricing</h2>
+          <p>
+            Estimates provided by Floyd's Plumbing are based on information available at the time of assessment and are not
+            guaranteed final prices. Final pricing may vary based on actual conditions discovered on-site, additional parts or
+            labor required, or scope changes requested by the customer.
+          </p>
+          <p>You will be informed of any significant pricing changes before additional work proceeds.</p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">6. Payment</h2>
+          <p>
+            Payment is due upon completion of services unless otherwise agreed in writing. Floyd's Plumbing accepts cash,
+            check, and major credit/debit cards. Returned checks are subject to a returned check fee in accordance with
+            Florida law.
+          </p>
+          <p>Unpaid balances may be subject to collection proceedings and applicable fees.</p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">7. Warranties & Limitations</h2>
+          <p>
+            Floyd's Plumbing warrants labor performed for a period of 30 days from the date of service completion. Manufacturer
+            warranties apply to parts and equipment as applicable. This warranty does not cover damage caused by misuse,
+            pre-existing conditions unrelated to our work, third-party modifications, or acts of nature.
+          </p>
+          <p>
+            TO THE FULLEST EXTENT PERMITTED BY FLORIDA LAW, FLOYD'S PLUMBING SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+            CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM THE USE OF OR INABILITY TO USE OUR SERVICES.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">8. Property Access & Customer Responsibilities</h2>
+          <p>
+            By scheduling a service, you represent that you are the property owner or have the authority to authorize work at
+            the service address. You agree to provide safe and reasonable access to the work area and to disclose any known
+            hazards.
+          </p>
+          <p>
+            Floyd's Plumbing is not responsible for damage resulting from pre-existing conditions, concealed defects, or
+            inaccurate information provided by the customer.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">9. Privacy</h2>
+          <p>
+            Your use of our services is also governed by our Privacy Policy, which is incorporated into these Terms by
+            reference. Our Privacy Policy describes how we collect, use, and protect your personal information, including
+            information collected through SMS opt-in. You can review our Privacy Policy at{' '}
+            <a class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark" href={privacyPolicyUrl}>{privacyPolicyUrl}</a>.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">10. Governing Law</h2>
+          <p>
+            These Terms of Service are governed by the laws of the State of Florida. Any disputes arising from these Terms or
+            your use of our services shall be resolved in Marion County, Florida.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">11. Changes to These Terms</h2>
+          <p>
+            Floyd's Plumbing reserves the right to update these Terms of Service at any time. Material changes will be
+            reflected by an updated effective date at the top of this page. Continued use of our services following any changes
+            constitutes acceptance of the updated Terms.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-black uppercase tracking-tight text-navy sm:text-2xl">12. Contact Us</h2>
+          <p class="text-navy">
+            Floyd's Plumbing LLC<br />
+            4145 SE 47th Pl, Ocala, FL 34480<br />
+            Phone:{' '}
+            <a class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark" href="tel:+13523046404">(352) 304-6404</a><br />
+            Email:{' '}
+            <a class="font-semibold text-brand underline underline-offset-2 hover:text-brand-dark" href="mailto:kenny@floydtheplumber.com">kenny@floydtheplumber.com</a>
+          </p>
+        </section>
+
+        <p class="border-t border-slate-200 pt-8 text-sm text-slate-600">
+          © 2026 Floyd's Plumbing LLC. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <BreadcrumbJsonLd crumbs={[{ name: 'Home', item: '/' }, { name: 'Terms of Service', item: '/terms/' }]} />
 </BaseLayout>

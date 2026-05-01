@@ -3,5 +3,13 @@
   "framework": "astro",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "installCommand": "npm ci"
+  "installCommand": "npm ci",
+  "redirects": [
+    { "source": "/services/leak-detection", "destination": "/services/repairs/", "permanent": true },
+    { "source": "/services/leak-detection/", "destination": "/services/repairs/", "permanent": true },
+    { "source": "/services/well-pumps", "destination": "/services/residential/", "permanent": true },
+    { "source": "/services/well-pumps/", "destination": "/services/residential/", "permanent": true },
+    { "source": "/service-areas/calesa", "destination": "/service-areas/calesa-township/", "permanent": true },
+    { "source": "/service-areas/calesa/", "destination": "/service-areas/calesa-township/", "permanent": true }
+  ]
 }
