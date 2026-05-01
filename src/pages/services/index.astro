@@ -23,8 +23,8 @@ const description =
       </nav>
       <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Services</h1>
       <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
-        Ocala plumbing with a custom-job mindset. Pick a category to see how we help homeowners, builders, and
-        businesses across Marion County.
+        Straight answers, flat-rate mindset, and a clear path to book. Open any service below to see what we
+        cover, how we work, and the fastest way to get on the schedule—call or request online.
       </p>
     </div>
   </div>
@@ -33,16 +33,26 @@ const description =
     <div>
       <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Main Categories</p>
       <h2 class="mt-2 text-2xl font-black uppercase text-navy">Core Plumbing Services</h2>
-      <ul class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {mainServices.map((s, i) => (
+      <p class="mt-3 max-w-3xl text-base text-slate-600">
+        Each page lists typical work, what to expect, and how to book. Prefer to talk it through first?
+        <a class="font-semibold text-brand underline decoration-brand/35 underline-offset-2 hover:decoration-brand" href={`tel:${siteConfig.phoneTel}`}>Call {siteConfig.phoneDisplay}</a>
+        or <a class="font-semibold text-brand underline decoration-brand/35 underline-offset-2 hover:decoration-brand" href="/contact/">send a message</a>.
+      </p>
+      <ul class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {mainServices.map((s, i) => {
+          const isLast = i === mainServices.length - 1;
+          return (
           <li
             class:list={[
-              i === mainServices.length - 1 && 'sm:col-span-2 lg:col-span-3',
+              isLast && 'sm:col-span-2 sm:flex sm:justify-center lg:col-span-1 lg:col-start-2 lg:block',
             ]}
           >
             <a
               href={`/services/${s.slug}/`}
-              class="card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200"
+              class:list={[
+                'card-service-photo group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md transition-[transform,box-shadow] duration-200 hover:border-brand/35 hover:shadow-lg',
+                isLast && 'w-full max-w-md lg:max-w-none',
+              ]}
             >
               <div class="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-brand/20 to-navy/30">
                 {s.heroImage ? (
@@ -69,21 +79,31 @@ const description =
               <div class="flex flex-1 flex-col p-7">
                 <h3 class="text-xl font-black uppercase tracking-tight text-navy">{s.title}</h3>
                 <p class="mt-3 flex-1 text-slate-600">{s.shortDescription}</p>
-                <span class="mt-5 text-sm font-bold text-brand transition group-hover:translate-x-0.5">Details →</span>
+                <p class="mt-2 text-xs font-semibold uppercase tracking-wide text-navy/70">Licensed · Insured · Upfront pricing</p>
+                <span class="mt-5 text-sm font-black uppercase tracking-wide text-brand transition group-hover:translate-x-0.5">
+                  View service &amp; book →
+                </span>
               </div>
             </a>
           </li>
-        ))}
+        );
+        })}
       </ul>
     </div>
 
     <div class="mt-16">
       <p class="text-xs font-black uppercase tracking-[0.25em] text-brand">Specialty Services</p>
       <h2 class="mt-2 text-2xl font-black uppercase text-navy">Specific Plumbing Work</h2>
-      <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <p class="mt-3 max-w-3xl text-base text-slate-600">
+        Focused pages for common jobs—scope, timing, and how to get a pro on site when you need it.
+      </p>
+      <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {subServices.map((s) => (
           <li>
-            <a href={`/services/${s.slug}/`} class="card-service group flex h-full flex-col p-6">
+            <a
+              href={`/services/${s.slug}/`}
+              class="card-service group flex h-full flex-col transition-[border-color,box-shadow] hover:border-brand/40"
+            >
               <span
                 class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand shadow-sm"
                 aria-hidden="true"
@@ -92,7 +112,9 @@ const description =
               </span>
               <h3 class="mt-4 text-base font-black uppercase tracking-tight text-navy">{s.navTitle ?? s.title}</h3>
               <p class="mt-2 flex-1 text-sm text-slate-600">{s.shortDescription}</p>
-              <span class="mt-3 text-sm font-bold text-brand transition group-hover:translate-x-0.5">Details →</span>
+              <span class="mt-3 text-sm font-black uppercase tracking-wide text-brand transition group-hover:translate-x-0.5">
+                Learn more &amp; book →
+              </span>
             </a>
           </li>
         ))}
