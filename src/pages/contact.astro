@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
 import { siteConfig } from '../site.config';
+import { formatDays, formatTime } from '../lib/businessHoursDisplay';
 
 const serviceParam = Astro.url.searchParams.get('service');
 const defaultService = serviceParam ?? '';
@@ -67,7 +68,7 @@ const mapEmbedUrl = `https://www.google.com/maps?q=${siteConfig.serviceGeo.latit
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Phone</p>
                 <a href={`tel:${siteConfig.phoneTel}`} class="text-base font-black text-navy hover:text-brand">{siteConfig.phoneDisplay}</a>
-                <p class="text-xs text-slate-500">Call for emergencies 24/7</p>
+                <p class="text-xs text-slate-500">Routine calls during office hours (below).</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
@@ -92,11 +93,19 @@ const mapEmbedUrl = `https://www.google.com/maps?q=${siteConfig.serviceGeo.latit
                 <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Hours</p>
                 {siteConfig.hours.map((h) => (
                   <p class="text-sm font-bold text-navy">
-                    {h.days[0]}{h.days.length > 1 ? ` to ${h.days[h.days.length - 1]}` : ''}: {h.opens} to {h.closes}
+                    {formatDays(h.days)}: {formatTime(h.opens)} to {formatTime(h.closes)}
                   </p>
                 ))}
                 {siteConfig.emergency24_7 && (
-                  <p class="mt-1 text-sm font-black uppercase tracking-wide text-red-600">Emergencies 24/7</p>
+                  <p class="mt-2 text-sm leading-snug text-slate-600">
+                    After hours and emergencies (24/7).{' '}
+                    <a
+                      href={`tel:${siteConfig.emergencyPhoneTel}`}
+                      class="font-black uppercase tracking-wide text-red-600 hover:text-red-700"
+                    >
+                      Call emergency line {siteConfig.emergencyPhoneDisplay}
+                    </a>
+                  </p>
                 )}
               </div>
             </li>

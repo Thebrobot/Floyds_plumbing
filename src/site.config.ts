@@ -4,7 +4,6 @@
  *
  * LAUNCH CHECKLIST (values marked with // TODO: must be filled in before going live):
  *   - address.streetAddress  (Florida DBPR advertising rule: plumbing ads should include contractor address or license #)
- *   - license.cfc            (Florida CFC# is required on all contractor advertising)
  *   - googleBusinessUrl      (replace search URL with claimed GBP / g.page URL)
  *   - social.facebook        (real FB URL)
  *   - contactFormActionUrl   (Formspree / Basin / Netlify Forms endpoint)
@@ -14,9 +13,15 @@ export const siteConfig = {
   businessName: "Floyd's Plumbing",
   tagline: 'Honest Work. Fair Prices. No Surprises.',
   foundingYear: 2008,
-  /** E.164 for tel: / JSON-LD */
+  /** E.164 for tel: / JSON-LD (main office / scheduling line) */
   phoneTel: '+13523046404',
   phoneDisplay: '(352) 304-6404',
+  /**
+   * After-hours and emergency dispatch (E.164 + display).
+   * Same as main line until a dedicated emergency number is published.
+   */
+  emergencyPhoneTel: '+13523046404',
+  emergencyPhoneDisplay: '(352) 304-6404',
   email: 'info@floydsplumbing.com',
   /** Public path under /public (WebP; run `npm run optimize-images` after replacing source JPG/PNG) */
   logoPath: '/images/floyds-plumbing-logo-trans.webp',
@@ -28,7 +33,7 @@ export const siteConfig = {
   contactFormActionUrl: '',
   /** Florida Certified Plumbing Contractor number. REQUIRED on all advertising per DBPR. */
   license: {
-    cfc: 'CFC#######', // TODO: replace with real Florida CFC license number before launch
+    cfc: 'CFC1428184',
     insured: true,
     bonded: true
   },
@@ -51,11 +56,12 @@ export const siteConfig = {
     value: 4.9, // TODO: sync with real Google rating
     count: 16   // TODO: sync with real Google review count
   },
-  /** Business hours for JSON-LD + footer display. 24/7 emergency handled separately. */
-  hours: [
-    { days: ['Mo', 'Tu', 'We', 'Th', 'Fr'], opens: '07:00', closes: '17:00' },
-    { days: ['Sa'], opens: '08:00', closes: '14:00' }
-  ] as ReadonlyArray<{ days: readonly string[]; opens: string; closes: string }>,
+  /** Business hours for JSON-LD + footer display. After-hours emergencies use `emergencyPhoneTel`. */
+  hours: [{ days: ['Mo', 'Tu', 'We', 'Th', 'Fr'], opens: '07:00', closes: '16:00' }] as ReadonlyArray<{
+    days: readonly string[];
+    opens: string;
+    closes: string;
+  }>,
   emergency24_7: true,
   /** Payment methods accepted (shown in footer + schema). */
   paymentMethods: ['Visa', 'Mastercard', 'American Express', 'Discover', 'Cash', 'Check', 'ACH'],

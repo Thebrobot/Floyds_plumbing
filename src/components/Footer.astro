@@ -2,29 +2,11 @@
 import { siteConfig } from '../site.config';
 import { mainServices, subServices } from '../data/services';
 import { locations } from '../data/locations';
+import { formatDays, formatTime } from '../lib/businessHoursDisplay';
 
 const { streetAddress, addressLocality, addressRegion, postalCode } = siteConfig.address;
 const hasStreet = Boolean(streetAddress && streetAddress.trim());
 const hours = siteConfig.hours;
-const dayLabel: Record<string, string> = {
-  Mo: 'Mon',
-  Tu: 'Tue',
-  We: 'Wed',
-  Th: 'Thu',
-  Fr: 'Fri',
-  Sa: 'Sat',
-  Su: 'Sun'
-};
-const formatDays = (days: readonly string[]) => {
-  if (days.length === 1) return dayLabel[days[0]];
-  return `${dayLabel[days[0]]} to ${dayLabel[days[days.length - 1]]}`;
-};
-const formatTime = (t: string) => {
-  const [h, m] = t.split(':').map((x) => parseInt(x, 10));
-  const suffix = h >= 12 ? 'pm' : 'am';
-  const h12 = h % 12 || 12;
-  return m === 0 ? `${h12}${suffix}` : `${h12}:${String(m).padStart(2, '0')}${suffix}`;
-};
 ---
 
 <footer class="bg-navy bg-trade-grid text-slate-300">
@@ -93,7 +75,17 @@ const formatTime = (t: string) => {
                 <span class="block">{formatDays(h.days)}: {formatTime(h.opens)} to {formatTime(h.closes)}</span>
               ))}
               {siteConfig.emergency24_7 && (
-                <span class="mt-1 block font-bold text-amber-400">Emergencies 24/7</span>
+                <>
+                  <span class="mt-2 block text-sm leading-snug text-slate-300">
+                    After hours and emergencies (24/7).
+                  </span>
+                  <a
+                    href={`tel:${siteConfig.emergencyPhoneTel}`}
+                    class="mt-0.5 inline-block font-bold text-amber-400 hover:text-amber-300"
+                  >
+                    Emergency line: {siteConfig.emergencyPhoneDisplay}
+                  </a>
+                </>
               )}
             </span>
           </li>
