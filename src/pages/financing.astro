@@ -3,11 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BreadcrumbJsonLd from '../components/BreadcrumbJsonLd.astro';
 import { siteConfig } from '../site.config';
 
-const title = "Plumbing Financing in Ocala | Floyd's Plumbing";
-const description =
-  "Affordable monthly financing for water heaters, repipes, and major plumbing projects. Floyd's Plumbing offers Wisetack financing with soft credit check.";
-
 const f = siteConfig.financing;
+const comingSoon = f?.comingSoon === true;
+
+const title = comingSoon
+  ? "Financing Coming Soon | Floyd's Plumbing"
+  : "Plumbing Financing in Ocala | Floyd's Plumbing";
+const description = comingSoon
+  ? "Floyd's Plumbing is preparing flexible financing for water heaters, repipes, and major plumbing projects. Check this page for updates, or call for upfront pricing today."
+  : "Affordable monthly financing for water heaters, repipes, and major plumbing projects. Floyd's Plumbing offers Wisetack financing with soft credit check.";
 ---
 
 <BaseLayout {title} {description}>
@@ -21,14 +25,42 @@ const f = siteConfig.financing;
           <li class="font-bold text-navy">Financing</li>
         </ol>
       </nav>
-      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Plumbing Financing</h1>
+      <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">
+        {comingSoon ? 'Financing: Coming Soon' : 'Plumbing Financing'}
+      </h1>
       <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
-        Don't let a failed water heater or a full repipe wreck your month. Pay over time with flexible plans.
+        {comingSoon
+          ? "We're finalizing payment options so larger jobs like repipes and tankless upgrades are easier to budget. Stay tuned. We'll post details here first."
+          : "Don't let a failed water heater or a full repipe wreck your month. Pay over time with flexible plans."}
       </p>
     </div>
   </div>
 
-  {f && (
+  {f && comingSoon && (
+    <div class="reveal mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-yellow/30 bg-gradient-to-br from-navy to-[#0a4d5a] p-8 text-white md:p-10">
+        <p class="text-xs font-black uppercase tracking-[0.25em] text-yellow">What to expect</p>
+        <p class="mt-4 text-base leading-relaxed text-slate-200">
+          Our team is working on financing solutions for homeowners who want to spread out the cost of major plumbing work. Nothing is live yet, but we didn't want to pull the topic off the site, because transparency matters.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-slate-200">
+          For now, every job still gets <span class="font-bold text-white">upfront flat-rate pricing</span> in writing before we start. Call for a quote on your project and we'll help you plan.
+        </p>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href={`tel:${siteConfig.phoneTel}`}
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-8 py-4 text-sm font-black uppercase tracking-wide text-white shadow-md hover:bg-red-700"
+        >
+          Call {siteConfig.phoneDisplay}
+        </a>
+        <p class="mt-4 text-sm text-slate-500">Or <a href="/contact/" class="font-bold text-brand hover:underline">send a message</a> and we'll follow up.</p>
+      </div>
+    </div>
+  )}
+
+  {f && !comingSoon && (
     <div class="reveal mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       <div class="grid gap-8 lg:grid-cols-3">
         <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-md">

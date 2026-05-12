@@ -3,6 +3,7 @@ import { siteConfig } from '../site.config';
 
 const f = siteConfig.financing;
 if (!f) return;
+const comingSoon = f.comingSoon === true;
 ---
 
 {f && (
@@ -16,19 +17,34 @@ if (!f) return;
         </svg>
       </div>
       <div class="flex-1 text-center md:text-left">
-        <p class="text-xs font-black uppercase tracking-[0.25em] text-yellow">Financing available</p>
-        <h2 class="mt-1 text-2xl font-black uppercase tracking-tight sm:text-3xl">
-          Pay monthly from {f.minApr} APR
-        </h2>
-        <p class="mt-2 text-sm text-slate-300 sm:text-base">
-          {f.blurb} Pre-qualify in 60 seconds, powered by {f.partner}.
+        <p class="text-xs font-black uppercase tracking-[0.25em] text-yellow">
+          {comingSoon ? 'Financing: Coming Soon' : 'Financing available'}
         </p>
+        {comingSoon ? (
+          <>
+            <h2 class="mt-1 text-2xl font-black uppercase tracking-tight sm:text-3xl">
+              Flexible payment options on the way
+            </h2>
+            <p class="mt-2 text-sm text-slate-300 sm:text-base">
+              We're finalizing financing solutions for larger projects. The financing page has the latest updates. Call us anytime for a written quote on your job.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 class="mt-1 text-2xl font-black uppercase tracking-tight sm:text-3xl">
+              Pay monthly from {f.minApr} APR
+            </h2>
+            <p class="mt-2 text-sm text-slate-300 sm:text-base">
+              {f.blurb} Pre-qualify in 60 seconds, powered by {f.partner}.
+            </p>
+          </>
+        )}
       </div>
       <a
         href="/financing/"
         class="inline-flex shrink-0 items-center justify-center rounded-full bg-yellow px-6 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-md transition hover:bg-yellow-hover"
       >
-        Learn More
+        {comingSoon ? 'Details' : 'Learn More'}
       </a>
     </div>
   </div>

@@ -28,7 +28,7 @@ export const faqs: Faq[] = [
   {
     question: 'Do you offer financing?',
     answer:
-      'Yes. We partner with Wisetack to offer flexible monthly payments on larger jobs like repipes, tankless conversions, and sewer replacements. The pre-qualification is a soft credit check that does not affect your score.'
+      "We're putting together financing options for larger jobs and will share details as soon as they're ready. In the meantime, call us for upfront flat-rate pricing and we'll help you plan the work."
   },
   {
     question: 'Is your pricing upfront or hourly?',

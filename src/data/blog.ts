@@ -69,7 +69,7 @@ export const posts: BlogPost[] = [
 <h2>5. Multiple repairs in one year</h2>
 <p>If you've called us (or anyone) more than twice in the past year for plumbing leaks, the math usually favors a repipe.</p>
 
-<p>We offer free repipe estimates and financing through Wisetack. Most whole-home repipes in Ocala run 2 to 4 days with water restored every night.</p>
+<p>We offer free repipe estimates, and we're adding financing options for larger projects — ask when you call. Most whole-home repipes in Ocala run 2 to 4 days with water restored every night.</p>
     `
   },
   {

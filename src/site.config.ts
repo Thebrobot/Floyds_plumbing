@@ -59,8 +59,12 @@ export const siteConfig = {
   emergency24_7: true,
   /** Payment methods accepted (shown in footer + schema). */
   paymentMethods: ['Visa', 'Mastercard', 'American Express', 'Discover', 'Cash', 'Check', 'ACH'],
-  /** Financing partner copy. Set to null to hide financing callouts. */
+  /**
+   * Financing partner copy. Set to null to hide financing callouts.
+   * Set `comingSoon: true` to keep the financing page and nav links while messaging is deferred.
+   */
   financing: {
+    comingSoon: true,
     partner: 'Wisetack',
     minApr: '0%',
     maxMonths: 60,

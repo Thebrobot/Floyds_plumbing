@@ -219,7 +219,9 @@ const formatTime = (t: string) => {
           href="/financing/"
           class="inline-flex items-center gap-2 self-start rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-yellow hover:bg-yellow/20"
         >
-          Financing from {siteConfig.financing.minApr} APR
+          {siteConfig.financing.comingSoon === true
+            ? 'Financing: Coming Soon'
+            : `Financing from ${siteConfig.financing.minApr} APR`}
         </a>
       )}
     </div>

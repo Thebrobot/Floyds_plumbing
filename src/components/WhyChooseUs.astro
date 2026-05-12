@@ -29,10 +29,15 @@ const items = [
   },
   {
     icon: 'percent',
-    title: 'Financing Available',
-    text: siteConfig.financing
-      ? `${siteConfig.financing.partner} financing from ${siteConfig.financing.minApr} APR, up to ${siteConfig.financing.maxMonths} months.`
-      : 'Flexible payment options for bigger jobs.'
+    title:
+      siteConfig.financing?.comingSoon === true
+        ? 'Financing: Coming Soon'
+        : 'Financing Available',
+    text: !siteConfig.financing
+      ? 'Flexible payment options for bigger jobs.'
+      : siteConfig.financing.comingSoon === true
+        ? "We're building financing options for bigger jobs like repipes and major repairs. Ask us for a quote, and we'll keep you posted as details roll out."
+        : `${siteConfig.financing.partner} financing from ${siteConfig.financing.minApr} APR, up to ${siteConfig.financing.maxMonths} months.`
   }
 ];
 ---
