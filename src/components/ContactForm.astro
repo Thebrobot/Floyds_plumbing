@@ -11,7 +11,9 @@ interface Props {
 
 const { id, compact = false, heading = 'Request service', defaultService = '' } = Astro.props;
 
-const hasAction = Boolean(siteConfig.contactFormActionUrl);
+const endpoint = siteConfig.contactFormActionUrl;
+const thanksUrl = siteConfig.contactFormThanksUrl ?? '/contact/thanks/';
+const hasAction = Boolean(endpoint);
 const smsConsentLabel =
   "Opt-in to SMS updates from Floyd's Plumbing (optional). Message frequency varies. Reply STOP to opt out. Message and data rates may apply.";
 ---
@@ -30,10 +32,13 @@ const smsConsentLabel =
     id={id}
     class="mt-6 space-y-4"
     method="post"
-    action={hasAction ? siteConfig.contactFormActionUrl : undefined}
     data-phone-tel={siteConfig.phoneTel}
+    data-phone-display={siteConfig.phoneDisplay}
+    data-contact-endpoint={hasAction ? endpoint : undefined}
+    data-thanks-url={hasAction ? thanksUrl : undefined}
     {...(!hasAction ? { 'data-contact-fallback': 'true' } : {})}
   >
+    <p class="hidden text-sm font-semibold text-red-600" data-contact-error role="alert"></p>
     {/* Honeypot: bots fill this, humans don't */}
     <div class="hidden" aria-hidden="true">
       <label>
@@ -147,7 +152,7 @@ const smsConsentLabel =
     {
       !hasAction && (
         <p class="text-xs text-slate-500">
-          Form endpoint not configured. Submitting will open your phone dialer so you can call us now.
+          Online requests are unavailable. Submitting will open your phone dialer so you can call us now.
         </p>
       )
     }

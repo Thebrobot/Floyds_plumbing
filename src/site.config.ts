@@ -6,7 +6,7 @@
  *   - address.streetAddress  (Florida DBPR advertising rule: plumbing ads should include contractor address or license #)
  *   - googleBusinessUrl      (replace search URL with claimed GBP / g.page URL)
  *   - social.facebook        (real FB URL)
- *   - contactFormActionUrl   (Formspree / Basin / Netlify Forms endpoint)
+ *   - GHL_WEBHOOK_URL        (Vercel env var — Go High Level inbound webhook)
  *   - rating.value/count     (once Google reviews are claimed)
  */
 export const siteConfig = {
@@ -29,8 +29,12 @@ export const siteConfig = {
   heroImagePath: '/images/floyd-hero.webp',
   /** Google Business Profile or reviews URL - update when available */
   googleBusinessUrl: 'https://www.google.com/maps/search/?api=1&query=Floyd%27s+Plumbing+Ocala+FL',
-  /** POST endpoint (Formspree, Basin, etc.). Empty = submit offers call-to-action fallback via client script. */
-  contactFormActionUrl: '',
+  /** Site API route that forwards to Go High Level (see /api/contact.js). Empty = phone dialer fallback. */
+  contactFormActionUrl: '/api/contact',
+  /** Redirect after a successful form submission. */
+  contactFormThanksUrl: '/contact/thanks/',
+  /** Primary scheduling CTA (header, hero, emergency bar, service/area pages). */
+  scheduleCtaLabel: 'Schedule Now',
   /** Florida Certified Plumbing Contractor number. REQUIRED on all advertising per DBPR. */
   license: {
     cfc: 'CFC1428184',

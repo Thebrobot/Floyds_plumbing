@@ -98,10 +98,62 @@ const og = ogImage ?? new URL(siteConfig.logoPath, siteBase).href;
       document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('form[data-contact-fallback="true"]').forEach(function (form) {
           form.addEventListener('submit', function (e) {
-            if (form.getAttribute('action')) return;
             e.preventDefault();
             var tel = form.getAttribute('data-phone-tel');
             if (tel) window.location.href = 'tel:' + tel;
+          });
+        });
+
+        document.querySelectorAll('form[data-contact-endpoint]').forEach(function (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var endpoint = form.getAttribute('data-contact-endpoint');
+            var thanksUrl = form.getAttribute('data-thanks-url') || '/contact/thanks/';
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var errorEl = form.querySelector('[data-contact-error]');
+            var originalText = submitBtn ? submitBtn.textContent : '';
+
+            if (errorEl) {
+              errorEl.textContent = '';
+              errorEl.classList.add('hidden');
+            }
+
+            var fd = new FormData(form);
+            var data = {};
+            fd.forEach(function (value, key) {
+              data[key] = value;
+            });
+            data.form_id = form.id || '';
+            data.page_url = window.location.href;
+
+            if (submitBtn) {
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Sending…';
+            }
+
+            fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            })
+              .then(function (res) {
+                if (!res.ok) throw new Error('submit failed');
+                window.location.href = thanksUrl;
+              })
+              .catch(function () {
+                var tel = form.getAttribute('data-phone-tel');
+                var msg = 'Something went wrong. Please try again or call us';
+                if (tel) msg += ' at ' + form.getAttribute('data-phone-display');
+                msg += '.';
+                if (errorEl) {
+                  errorEl.textContent = msg;
+                  errorEl.classList.remove('hidden');
+                }
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = originalText;
+                }
+              });
           });
         });
 
