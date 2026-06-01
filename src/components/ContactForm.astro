@@ -14,8 +14,6 @@ const { id, compact = false, heading = 'Request service', defaultService = '' } 
 const endpoint = siteConfig.contactFormActionUrl;
 const thanksUrl = siteConfig.contactFormThanksUrl ?? '/contact/thanks/';
 const hasAction = Boolean(endpoint);
-const smsConsentLabel =
-  "Opt-in to SMS updates from Floyd's Plumbing (optional). Message frequency varies. Reply STOP to opt out. Message and data rates may apply.";
 ---
 
 <section
@@ -129,16 +127,49 @@ const smsConsentLabel =
         class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
       ></textarea>
     </div>
-    <div class="rounded-xl border border-slate-200 bg-page-muted p-4">
-      <label class="flex cursor-pointer gap-3 text-sm leading-snug text-navy">
+    <div class="space-y-3 rounded-xl border border-slate-200 bg-page-muted p-4">
+      <div class="flex gap-3">
         <input
+          id={`${id}-terms`}
+          type="checkbox"
+          name="terms_consent"
+          value="yes"
+          class="mt-1 h-4 w-4 shrink-0 rounded border-slate-400 text-brand focus:ring-brand"
+        />
+        <label for={`${id}-terms`} class="cursor-pointer text-sm leading-snug text-navy">
+          I agree to the{' '}
+          <a href="/terms/" class="underline hover:text-brand" onclick="event.stopPropagation()">
+            Terms &amp; Conditions
+          </a>{' '}
+          and{' '}
+          <a href="/privacy/" class="underline hover:text-brand" onclick="event.stopPropagation()">
+            Privacy Policy
+          </a>
+          .
+        </label>
+      </div>
+      <div class="flex gap-3">
+        <input
+          id={`${id}-sms`}
           type="checkbox"
           name="sms_consent"
           value="yes"
           class="mt-1 h-4 w-4 shrink-0 rounded border-slate-400 text-brand focus:ring-brand"
         />
-        <span>{smsConsentLabel}</span>
-      </label>
+        <label for={`${id}-sms`} class="cursor-pointer text-sm leading-snug text-navy">
+          I agree to receive marketing text messages from Floyd's Plumbing. Message frequency may vary. Msg &amp; data
+          rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase. Mobile
+          opt-in data will not be shared with third parties for promotional and marketing purposes. View our{' '}
+          <a href="/terms/" class="underline hover:text-brand" onclick="event.stopPropagation()">
+            Terms &amp; Conditions
+          </a>{' '}
+          and{' '}
+          <a href="/privacy/" class="underline hover:text-brand" onclick="event.stopPropagation()">
+            Privacy Policy
+          </a>
+          .
+        </label>
+      </div>
     </div>
     <button
       type="submit"

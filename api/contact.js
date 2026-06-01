@@ -43,6 +43,8 @@ export default async function handler(req, res) {
     service: String(body.service ?? ''),
     urgency: String(body.urgency ?? ''),
     message,
+    terms_consent: body.terms_consent === 'yes',
+    termsConsent: body.terms_consent === 'yes',
     sms_consent: body.sms_consent === 'yes',
     smsConsent: body.sms_consent === 'yes',
     source: 'website',
