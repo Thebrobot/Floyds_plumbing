@@ -83,6 +83,18 @@ const hasAction = Boolean(endpoint);
         class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
       />
     </div>
+    <div>
+      <label for={`${id}-service-address`} class="block text-sm font-bold text-navy">Service address</label>
+      <input
+        id={`${id}-service-address`}
+        name="service_address"
+        type="text"
+        required
+        autocomplete="street-address"
+        placeholder="Street address, city, ZIP"
+        class="mt-1 w-full rounded-xl border border-slate-300 bg-page px-3 py-2 text-navy shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25"
+      />
+    </div>
     <div class:list={['grid gap-4', compact ? 'sm:grid-cols-2' : 'sm:grid-cols-2']}>
       <div>
         <label for={`${id}-service`} class="block text-sm font-bold text-navy">Service type</label>

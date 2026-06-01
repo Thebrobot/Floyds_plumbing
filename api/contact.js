@@ -23,9 +23,10 @@ export default async function handler(req, res) {
   const name = String(body.name ?? '').trim();
   const email = String(body.email ?? '').trim();
   const phone = String(body.phone ?? '').trim();
+  const serviceAddress = String(body.service_address ?? '').trim();
   const message = String(body.message ?? '').trim();
 
-  if (!name || !email || !phone || !message) {
+  if (!name || !email || !phone || !serviceAddress || !message) {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
@@ -40,6 +41,9 @@ export default async function handler(req, res) {
     name,
     email,
     phone,
+    service_address: serviceAddress,
+    serviceAddress,
+    address: serviceAddress,
     service: String(body.service ?? ''),
     urgency: String(body.urgency ?? ''),
     message,

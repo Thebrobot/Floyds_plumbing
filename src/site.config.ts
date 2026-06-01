@@ -22,7 +22,7 @@ export const siteConfig = {
    */
   emergencyPhoneTel: '+13523046404',
   emergencyPhoneDisplay: '(352) 304-6404',
-  email: 'info@floydsplumbing.com',
+  email: 'kenny@floydtheplumber.com',
   /** Public path under /public (WebP; run `npm run optimize-images` after replacing source JPG/PNG) */
   logoPath: '/images/floyds-plumbing-logo-trans.webp',
   /** Homepage hero (full-bleed). Optimized WebP in public/images */
