@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^10.0.8",
     "@fontsource/inter": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
-    "@vercel/analytics": "^2.0.1",
     "astro": "^6.4.2",
     "tailwindcss": "^4.2.2"
   },
