@@ -28,7 +28,11 @@ const mapEmbedUrl = `https://www.google.com/maps?q=${siteConfig.serviceGeo.latit
       </nav>
       <h1 class="font-display mt-6 text-4xl uppercase text-navy sm:text-5xl">Contact</h1>
       <p class="mt-4 max-w-2xl text-lg font-medium text-slate-700">
-        Tell us what you need. Include photos or plans if helpful. We respond as quickly as dispatch allows.
+        {
+          siteConfig.contactFormsHidden
+            ? 'Call, email, or use the chat widget on this page. We respond as quickly as dispatch allows.'
+            : 'Tell us what you need. Include photos or plans if helpful. We respond as quickly as dispatch allows.'
+        }
       </p>
       <div class="mt-6 flex flex-col gap-3 sm:flex-row">
         <a

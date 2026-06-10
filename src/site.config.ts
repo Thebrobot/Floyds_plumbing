@@ -29,6 +29,11 @@ export const siteConfig = {
   heroImagePath: '/images/floyd-hero.webp',
   /** Google Business Profile or reviews URL - update when available */
   googleBusinessUrl: 'https://www.google.com/maps/search/?api=1&query=Floyd%27s+Plumbing+Ocala+FL',
+  /**
+   * Temporarily hide all online contact/service request forms (A2P SMS carrier verification).
+   * Set to false after approval to restore forms sitewide.
+   */
+  contactFormsHidden: true,
   /** Site API route that forwards to Go High Level (see /api/contact.js). Empty = phone dialer fallback. */
   contactFormActionUrl: '/api/contact',
   /** Redirect after a successful form submission. */
