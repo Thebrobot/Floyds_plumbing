@@ -31,7 +31,8 @@ const articleLd = {
     name: siteConfig.businessName,
     logo: { '@type': 'ImageObject', url: new URL(siteConfig.logoPath, origin).href }
   },
-  mainEntityOfPage: `${origin}/blog/${post.slug}/`
+  mainEntityOfPage: `${origin}/blog/${post.slug}/`,
+  image: new URL(post.image, origin).href
 };
 const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
   year: 'numeric',
@@ -64,6 +65,18 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
   </div>
 
   <article class="reveal mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <figure class="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+      <img
+        src={post.image}
+        alt={post.imageAlt}
+        width="1200"
+        height="675"
+        class="aspect-[16/9] w-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </figure>
     <div class="prose-blog space-y-4 text-base leading-relaxed text-slate-700 sm:text-lg" set:html={post.bodyHtml}></div>
 
     <div class="mt-14 rounded-2xl border border-slate-200 bg-page-muted p-6 sm:p-8">

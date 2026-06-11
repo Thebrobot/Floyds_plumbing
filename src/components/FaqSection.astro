@@ -1,5 +1,8 @@
 ---
 import { faqs } from '../data/faqs';
+import { posts } from '../data/blog';
+
+const blogTitles = Object.fromEntries(posts.map((p) => [p.slug, p.title]));
 
 interface Props {
   /** How many FAQs to show (defaults to all). */
@@ -33,6 +36,15 @@ const items = typeof limit === 'number' ? faqs.slice(0, limit) : faqs;
               </svg>
             </summary>
             <p class="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{faq.answer}</p>
+            {faq.blogSlug && blogTitles[faq.blogSlug] && (
+              <a
+                href={`/blog/${faq.blogSlug}/`}
+                class="mt-4 inline-flex text-sm font-bold text-brand transition hover:translate-x-0.5 hover:text-brand-dark"
+                aria-label={`Read more: ${blogTitles[faq.blogSlug]}`}
+              >
+                Read more →
+              </a>
+            )}
           </details>
         </li>
       ))}

@@ -6,7 +6,7 @@
  *   - address.streetAddress  (Florida DBPR advertising rule: plumbing ads should include contractor address or license #)
  *   - googleBusinessUrl      (replace search URL with claimed GBP / g.page URL)
  *   - social.facebook        (real FB URL)
- *   - GHL_WEBHOOK_URL        (Vercel env var — Go High Level inbound webhook)
+ *   - GHL_WEBHOOK_URL        (Vercel env var, Go High Level inbound webhook)
  *   - rating.value/count     (once Google reviews are claimed)
  */
 export const siteConfig = {

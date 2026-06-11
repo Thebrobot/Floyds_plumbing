@@ -293,6 +293,9 @@
 .prose-blog a {
   @apply font-bold text-brand underline underline-offset-2 hover:text-brand-dark;
 }
+.prose-blog img {
+  @apply my-6 w-full rounded-xl border border-slate-200 shadow-sm;
+}
 
 /* Gentle pulse for primary Call CTA that draws the eye without being obnoxious */
 @keyframes cta-phone-pulse {
