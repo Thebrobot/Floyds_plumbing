@@ -79,12 +79,12 @@
 }
 
 #site-header.is-header-scrolled .header-main {
-  @apply border-slate-400/60 bg-slate-300 shadow-lg ring-1 ring-slate-400/40;
+  @apply border-slate-400/60 bg-white shadow-lg ring-1 ring-slate-400/40;
 }
 
 #site-header .header-main .header-logo-well {
-  @apply inline-flex items-center justify-center rounded-xl bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-900/10 duration-200 sm:rounded-2xl sm:px-4 sm:py-2 md:px-5 md:py-2;
-  transition: padding 0.2s ease, border-radius 0.2s ease;
+  @apply inline-flex items-center justify-center rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-900/10 duration-200 sm:px-4 sm:py-2 md:px-5 md:py-2;
+  transition: padding 0.2s ease;
 }
 
 #site-header .header-main .header-logo {
@@ -92,7 +92,7 @@
 }
 
 #site-header.is-header-scrolled .header-main .header-logo-well {
-  @apply rounded-lg px-2.5 py-1 sm:rounded-xl sm:px-3 sm:py-1.5;
+  @apply rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5;
 }
 
 #site-header.is-header-scrolled .header-main .header-logo {
