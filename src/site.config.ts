@@ -33,7 +33,7 @@ export const siteConfig = {
    * Temporarily hide all online contact/service request forms (A2P SMS carrier verification).
    * Set to false after approval to restore forms sitewide.
    */
-  contactFormsHidden: true,
+  contactFormsHidden: false,
   /** Site API route that forwards to Go High Level (see /api/contact.js). Empty = phone dialer fallback. */
   contactFormActionUrl: '/api/contact',
   /** Redirect after a successful form submission. */
